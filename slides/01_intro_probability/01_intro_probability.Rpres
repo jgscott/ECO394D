@@ -86,7 +86,8 @@ The digital economy runs on $P(A \mid B)$!
 Conditional probability  
 =========
 
-A really important fact is that conditional probabilities are _not symmetric_:  
+A really important fact is that conditional probabilities are _not symmetric_:
+
 $$
 P(A \mid B) \neq P(B \mid A)  
 $$
@@ -103,7 +104,7 @@ Conditional probability
 - A: "you can dribble a basketball"  
 - B: "you play in the NBA"  
 
-```{r, out.width = "650px", fig.align='center', echo=FALSE}
+```{r, out.width = "500px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/kawhi_leonard.jpg")
 ```
 
@@ -118,7 +119,7 @@ Conditional probability
 - A: "you can dribble a basketball"  
 - B: "you play in the NBA"  
 
-```{r, out.width = "650px", fig.align='center', echo=FALSE}
+```{r, out.width = "500px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/grandpa_basketball.jpg")
 ```
 
@@ -228,8 +229,8 @@ Some optional technical points
 Point 2: our definition of probability assumes that $P(A)$ is well defined for any $A \subset \Omega$.  If $\Omega$ is a finite or countable set (e.g. the integers), then $P(A)$ is always well defined.  
 
 But if $\Omega$ is uncountably infinite (e.g. the real numbers), then $P(A)$ is not necessary well defined for all possible subsets $A \subset \Omega$.  
-- Wild but true!  It is possible to define bizarre sets for which there is _no meaningful notion of that set's size_.   (If you care: Google terms like "non-measurable set", "Vitali set", and "Banach-Tarski paradox").  
-- But it's actually really hard to construct such a crazy set.  Pretty much every "normal" set you might care about (like intervals and unions of intervals) can be assigned a well-defined size.  Technically speaking, these are called the _Borel sets._  
+- Wild but true!  It is possible to define bizarre sets for which there is _no meaningful notion of that set's size_.   (If you care: Google "non-measurable set" and "Banach-Tarski paradox").  
+- But it's hard to construct such crazy sets.  Every "normal" set you might care about (intervals, unions of intervals) has a well-defined size.  Technically speaking, these are called the _Borel sets._  
 
 
 Quick summary of terms
@@ -299,10 +300,10 @@ The "probability calculus" provides a set of rules for calculating probabilities
   (Why?  Write $B$ as $B = A \cup (B \setminus A)$ and use finite additivity.  )
 
   3. $P(B \setminus A) = P(B) - P(A \cap B)$.  
-  (Why?  Your turn!)  
+  (Why?  __Your turn!__)  
   
   4. Addition rule: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.  
-  (Why?  Your turn!)  
+  (Why?  __Your turn!__)  
 
 
 
@@ -362,14 +363,13 @@ This is an axiom: it cannot be proven from Kolmogorov's rules.
 Conditional probability
 =========
 
-Let's see why this axiom makes sense.
+Let's see why this axiom makes sense.  (Figure courtesy David Speigelhalter and Jenny Gage.)
 
 
 ```{r, out.width = "650px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/breast_cancer_screening_tree.png")
 ```
 
-Figure courtesy David Speigelhalter and Jenny Gage.
 
 
 Conditional probability
@@ -414,7 +414,7 @@ Conditional probabilities from data
 
 Suppose we saw data on returning bombers that looked like this:  
 
-```{r, out.width = "650px", fig.align='center', echo=FALSE}
+```{r, out.width = "550px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/wald_table1.png")
 ```
 
@@ -436,9 +436,9 @@ $$
 P(\mbox{returns home} \mid \mbox{hit on wings or fuselage})
 $$
 
-Wald was able to reconstruct the joint distribution over damage type and mission result:  
+Wald used some fancy math to reconstruct the _joint frequency distribution_ over damage type and mission result:  
 
-```{r, out.width = "750px", fig.align='center', echo=FALSE}
+```{r, out.width = "650px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/wald_table2.png")
 ```
 
@@ -512,9 +512,9 @@ _Conditional probabilities hold the key to understanding individualized preferen
 Conditional probabilities from data
 =========
 
-Solution: go to the data!  (Remember, you're Netflix: you have tons of it.)  Suppose your database on 5 million subscribers like Linda reveals the following pattern:  
+Solution: go to the data!  Suppose your database on 5 million subscribers like Linda reveals the following pattern:  
 
-```{r, out.width = "650px", fig.align='center', echo=FALSE}
+```{r, out.width = "550px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/netflix_table1.png")
 ```
 
@@ -533,7 +533,7 @@ Result: a good recommendation with no human in the loop.
 The rule of total probability
 =========
 
-Consider the following data on complication rates at an obstetrics ward in England:
+Consider the following data on complication rates at a maternity hospital in Cambridge, England:
 
 | | Easier deliveries | Harder deliveries | Overall |
 |----------------|-------------|-------------|-------------|
@@ -555,17 +555,17 @@ Consider the following data on complication rates at an obstetrics ward in Engla
 
  So would you rather have a junior doctor or a senior doctor?  
 
-This table exhibits something called _Simpson's paradox_.  Senior doctors have:  
+_Simpson's paradox_.  Senior doctors have:  
 - lower complication rates for easy cases.  
 - lower complication rates for hard cases.  
-- higher complication rates overall! (7.6% versus 7.2%.)  Why?  
+- higher complication rates overall! (7.6% versus 7.2%.)  __Why?__  
 
 
 
 The rule of total probability
 =========
 
-Let's see the table with number of deliveries performed in parentheses:  
+Let's see the table with number of deliveries performed (in parentheses):  
 
 | | Easier deliveries | Harder deliveries | Overall |
 |----------------|-------------|-------------|-------------|
@@ -576,7 +576,7 @@ Let's see the table with number of deliveries performed in parentheses:
 The rule of total probability
 =========
 
-Let's see the table with number of deliveries performed in parentheses:  
+Let's see the table with number of deliveries performed (in parentheses):  
 
 | | Easier deliveries | Harder deliveries | Overall |
 |----------------|-------------|-------------|-------------|
@@ -586,7 +586,7 @@ Let's see the table with number of deliveries performed in parentheses:
 
 Now we see what's going on:  
 - Most of the deliveries performed by junior doctors are easier cases, where complication rates are lower overall.  
-- The senior doctors, meanwhile, work a much higher fraction of the harder cases.  Their overall complication rate reflects this burden.  
+- The senior doctors, meanwhile, work a much higher fraction of the harder cases.  
 
 
 The rule of total probability
@@ -606,7 +606,7 @@ The rule of total probability
 
 Let's see this rule in action for the hospital data.  
 
-There are only two types of deliveries in the table: easy and hard.  So:  
+There are two types of deliveries: easy and hard.  So:  
 
 $$
 P(\mbox{complication}) = P(\mbox{easy and complication}) + P(\mbox{hard and complication}) \, .
@@ -634,6 +634,7 @@ P(\mbox{complication}) = \frac{213}{315} \cdot 0.052 + \frac{102}{315} \cdot 0.1
 $$ 
 
 And for junior doctors, we get
+
 $$
 P(\mbox{complication}) = \frac{3169}{3375} \cdot 0.067 + \frac{206}{3375} \cdot 0.155 = 0.072 \, .
 $$ 
@@ -712,9 +713,9 @@ Example: drug surveys
 =========
 
 
-Virginia Delaney-Black and her colleagues at Wayne State University gave an anonymous survey teenagers in Detroit:
-- 432 teens were asked whether they had used various illegal drugs.  
-- Of these 432, 211 of them also agreed to give a hair sample.  
+Virginia Delaney-Black and her colleagues at Wayne State University gave an anonymous survey to teenagers in Detroit:
+- 432 teens were asked whether they had used various drugs.  
+- Of these 432 teens, 211 agreed to give a hair sample.  
 - Therefore, for these 211 respondents, the researchers could compare people's answers with an actual drug test.  
 - Hair samples were analyzed in the aggregate: no hair sample could be traced back to an individual survey or teen.  
 
@@ -727,7 +728,7 @@ Example: drug surveys
 
 The two sets of results were strikingly different.  
 - Of the 211 teens who provided a hair sample, only a tiny fraction of them (0.7%) admitted to having used cocaine.  
-- Bu when the hair samples were analyzed in the lab, 69 of them (33.7\%) came back positive for cocaine use.   
+- Bu when the hair samples were analyzed in the lab, 69 of them (33.7%) came back positive for cocaine use.   
 
 
 Example: drug surveys
@@ -761,7 +762,7 @@ Drug surveys are really important:
 - The problem fills our jails, drains public finances, and perpetuates a trans-generational cycle of poverty.  
 - Getting good data on this problem is important! Doctors, schools, and governments all rely on self-reported measures of drug use to guide their thinking on this issue. 
 
-Delaney-Black's work poses the question: __can we trust any of it?__
+Delaney-Black's work seems to ask: __can we trust any of it?__
  
  
 It's not just drug surveys
@@ -799,7 +800,7 @@ Key fact here: only the respondent knows which question he or she is answering.
 
 This reduces the incentive to lie.
 
-__Let's run the survey!__ 
+__Let's run the survey!__  Flip a coin, keep the result private, and then answer the question in public :-)  
 
 
 Analyzing the results  
@@ -883,7 +884,7 @@ knitr::include_graphics("fig/joe_dimaggio.jpg")
 
 ***
 
-Independence is usually something we _choose to assume_ for the purpose of making calculations easier.  For example:  
+Independence is often something we _choose to assume_ for the purpose of making calculations easier.  For example:  
 - Joe DiMaggio got a hit in about 80% of the baseball games he played in.  
 - Suppose that successive games are independent: if JD gets a hit today, it doesn't change the probability he's going to get a hit tomorrow.  
 - Then P(hit in game 1, hit in game 2) = $0.8 \cdot 0.8 = 0.64$.  
@@ -917,6 +918,8 @@ $$
 \end{aligned}
 $$
 
+Small difference in one game, but a big difference over the long run.  
+
 Independence
 ============
 
@@ -930,7 +933,7 @@ $$
 \end{aligned}
 $$
 
-
+Never gonna happen!  
 
 Independence
 ============
@@ -949,10 +952,44 @@ What about everday "hitting streaks"...?
 ============
 
 - A mutual-fund manager outperforms the stock market for 15 years straight.
-- A World-War II airman completes 25 combat missions, and gets to go home.
+- A World-War II airman completes 25 combat missions without getting shot down, and gets to go home.
 - A retired person successfully takes a shower for 1000 days in a row without slipping.   
-- A child goes 200 school days without catching a cold from other kids at school.  
+- A child goes 180 school days, or 1 year, without catching a cold from other kids at school.  (Good luck!)  
 
+
+An example: surviving falls  
+============
+
+```{r, out.width = "750px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/ford_10.jpg")
+```
+
+Gerald Ford falls down the steps of Air Force One.  (He survived.)  
+
+
+An example: surviving falls  
+============
+
+```{r, out.width = "650px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/ford_skiing.jpg")
+```
+
+Gerald Ford falls while skiing.  (He again survived.)  
+
+An example: surviving falls  
+============
+
+```{r, out.width = "750px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/gerald_ford_salzburg.jpg")
+```
+
+Gerald Ford falls at a summit in Salzburg.  (He once again survived.)  
+
+
+An example: surviving falls  
+============
+
+[Chevy Chase playing Gerald Ford on Saturday Night Live](https://www.youtube.com/watch?v=nEIpAIqzbTg&feature=youtu.be&t=140) 
 
 An example: surviving falls  
 ============
@@ -979,7 +1016,7 @@ An example: surviving falls
 Let's change the numbers a tiny bit.  
 
 What if your daily survivorship probability was a bit smaller than average?
-- Maybe you forget to put a towel down on the bathroom floor after a shower.  
+- Maybe you forget to put a towel down on the bathroom floor after a shower?    
 - Maybe you never bother holding the handrail as you walk down the stairs?  
 
 To invoke the DiMaggio/Rose example: what if you became only slightly less skillful at not falling?  
@@ -988,9 +1025,9 @@ An example: surviving falls
 ============
 
 For some specific numbers, let's make a diet analogy:  
-- Every day you have a single mid-morning Tic-Tac, which has 2 calories.  
+- Imagine that every day you have a single mid-morning Tic-Tac, which has 2 calories.  
 - One day, you decide to give it up.  
-- But you decide to go slowly: you'll forego that Tic-Tac only once every 10 days.  
+- But you're wary of crash diets, so you decide to go slowly: you'll forego that Tic-Tac only once every 10 days.  
 
 You've just reduced your average daily calorie consumption by about 1/100th of a percent.  Will you lose weight over the long run?  Probably not.  
 
@@ -1022,8 +1059,8 @@ Suppose we have two random outcomes $A$ and $B$ and we want to know if they're i
 Solution: 
 - Check whether $B$ happening seems to change the probability of $A$ happening.  
 - That is, verify using data whether $P(A \mid B) = P(A \mid \mbox{not } B) = P(A)$
-- These probabilities won't be _exactly_ alike because of statistical fluctuations.  
-- But with enough data they should be close if $A$ and $B$ are independent.  
+- These probabilities won't be _exactly_ alike because of statistical fluctuations, especially with small samples.  
+- But with enough data they should be pretty close if $A$ and $B$ are independent.  
 
 
 Example: the hot hand  
@@ -1036,7 +1073,7 @@ knitr::include_graphics("fig/nbajam.jpg")
 Example: the hot hand  
 ========
 
-The "hot hand hypothesis" says that if a player makes their _previous_ shot, they're more likely to make their _next_ shot:  
+The "hot hand hypothesis" says that if a player makes their _previous_ shot, they're more likely to make their _next_ shot ("He's on fire!"):  
 
 $$
 P(\mbox{makes next} \mid \mbox{makes previous}) > 
@@ -1054,7 +1091,7 @@ Example: the hot hand
 ========
 right: 45%
 
-Let's look at some data on shooting percentages for the 1980--81 Philadelphia 76ers.  
+The next slide show some data on shooting percentages for Dr. J's 1980--81 Philadelphia 76ers.  
 
 Key question: do players shoot better, worse, or about the same after they've just _made_ a basket, versus how they do after they've just _missed_ a basket?  
 
@@ -1069,7 +1106,6 @@ knitr::include_graphics("fig/julius_irving.jpg")
 
 Example: the hot hand  
 ========
- 
 type: prompt 
 
 Shooting percentages after:
@@ -1088,14 +1124,12 @@ Shooting percentages after:
 | Steve Mix | 0.70 | 0.56 | 0.52 | 0.48 | 0.52 | 0.51 | 0.36 |   
 
 </small> 
-__Which hypothesis looks right: hot hand or independence?__
+__Which hypothesis looks right:__ hot hand or independence?  (Remember small-sample fluctations.)  
 
 
 When independence goes wrong
 ========
 right: 40%
-
-My four Monroe cousins are all colorblind.  
 
 Suppose we pick a random US family with four male children.  What is the probability $P$ that all four will be colorblind?  
 
@@ -1160,10 +1194,150 @@ When independence goes wrong
 
 Seems silly, right?
 
-But you'd be surprised at how often people make this mistake!  We might call this the "fallacy of mistaken compounding."  
+But you'd be surprised at how often people make this mistake!  We might call this the "fallacy of mistaken compounding:" assuming events are independent and naively multiplying their probabilities.    
 
 Out of class, I'm asking you to read two short pieces that illustrate this unfortunate reality:  
 
-- [How likely is it that birth control could let you down?](https://www.nytimes.com/interactive/2014/09/14/sunday-review/unplanned-pregnancies.html), from the _New York Times_  
-- An excerpt from Chapter 7 of [AIQ: How People and Machines are Smarter Together](), by Nick Polson and James Scott.  
+- [How likely is it that birth control could let you down?](https://www.nytimes.com/interactive/2014/09/14/sunday-review/unplanned-pregnancies.html) from the _New York Times_  
+- An excerpt from Chapter 7 of [AIQ: How People and Machines are Smarter Together](https://github.com/jgscott/ECO394D/blob/master/ref/AIQ_excerpt_contraceptive_effectiveness.pdf), by Nick Polson and James Scott.    
+
+
+Bayes' Rule  
+========
+
+Key fact: all probabilities are contingent on what we know.  
+
+When our knowledge changes, our probabilities must change, too.  
+
+__Bayes' rule tells us how to change them.__  Suppose A is some event we're interested in and B is some new relevant information.  Bayes' rule tells us how to move from a prior probability, $P(A)$, to a posterior probability $P(A \mid B)$ that incorporates our knowledge of B.  
+
+
+Bayes' Rule  
+========
+
+$$
+P(A \mid B) = P(A) \cdot \frac{P(B \mid A)}{P(B)}  
+$$
+
+- $P(A)$ is the prior probability: how probable is $A$, before having seen data $B$?
+- $P(A \mid B)$ is the posterior probability: how probable is $A$, now that we've seen data $B$?
+- $P(B \mid A)$ is the likelihood: if $A$ were true, how likely is it that we'd see data $B$?
+- $P(B)$ is the marginal probability of $B$: how likely is it that we'd see data $B$ overall, regardless of whether $A$ is true or not?
+
+Calculating $P(B)$: use the rule of total probability.  
+
+
+Bayes' Rule: a toy example
+=======
+
+Imagine a jar with 1024 normal quarters.  Into this jar, a friend places a single two-headed quarter (i.e. with heads on both sides).  Your friend shakes the jar to mix up the coins.  You draw a single coin at random from the jar, and without examining it closely, flip the coin ten times.
+
+The coin comes up heads all ten times.
+
+__Are you holding the two-headed quarter, or an ordinary quarter?__
+
+Not just a toy example: in any industry where companies compete strenuously for talent, a lot of time and energy is spent looking for "two-headed quarters"!  
+
+
+
+Bayes' Rule: a toy example
+=======
+
+A real-world version of the two-headed quarter problem:  
+- Suppose you're in charge of a large trading desk at a major Wall Street bank.  
+- You have 1025 employees under you, and each one is responsible for managing a portfolio of stocks to make money for your firm and its clients.
+- One day, a young trader knocks on your door and confidently asks for a big raise.  You ask her to make a case for why she deserves one.
+
+Bayes' Rule: a toy example
+=======
+
+She replies:
+
+> Look at my trading record.  I've been with the company for ten months, and in each of those ten months, my portfolio returns have been in the top half of all the portfolios managed by my peers on the trading floor.  If I were just an average trader, this would be very unlikely.  In fact, the probability that an average trader would see above-average results for ten months in a row is only $(1/2)^{10}$, which is less than one chance in a thousand.  Since it's unlikely I would be that lucky, the implication is that I am a talented trader, and I should therefore get a raise.
+
+
+Bayes' Rule: a toy example
+=======
+
+__Is the trader lucky, or good?__  Same math as the big jar of quarters!  
+- Metaphorically, the trader is claiming to be a two-headed coin ($T$)  
+- Her data is "D = ten heads in a row": she's performed above average for ten months straight.  
+- This is admittedly unlikely: $P(D \mid T) = 1/2^10 = 1/1024$. 
+- But excellent performers are probably also rare, so that the prior probability $P(T)$ is pretty small to begin with.  
+
+To make an informed decision, you need to know $P(T \mid D)$: the posterior probability that the trader is an above-average performer, given the data.
+  
+Bayes' Rule: a toy example
+=======
+
+So let's return to the two-headed quarter example and see how a posterior probability is calculated using Bayes' rule:  
+
+$$
+P(T \mid D) = \frac{P(T) \cdot P(D \mid T)}{P(D)} \, .
+$$
+
+We'll take this equation one piece at a time.  
+
+Bayes' Rule: a toy example
+=======
+
+$$
+P(T \mid D) = \frac{P(T) \cdot P(D \mid T)}{P(D)} \, .
+$$
+
+$P(T)$ is the prior probability that you are holding the two-headed quarter.  
+- There are 1025 quarters in the jar: 1024 ordinary ones, and one two-headed quarter.  
+- Assuming that your friend mixed the coins in the jar well enough, then you are just as likely to draw one coin as another.  
+- So $P(T)$ must be 1/1025. 
+
+Bayes' Rule: a toy example
+=======
+
+$$
+P(T \mid D) = \frac{P(T) \cdot P(D \mid T)}{P(D)} \, .
+$$
+
+Next, what about $P(D \mid T)$, the likelihood of flipping ten heads in a row, given that you chose the two-headed quarter?  
+- Clearly this is 1.  
+- If the quarter has two heads, there is no possibility of seeing anything else.
+
+Bayes' Rule: a toy example
+=======
+
+$$
+P(T \mid D) = \frac{P(T) \cdot P(D \mid T)}{P(D)} \, .
+$$
+
+Finally, what about $P(D)$, the marginal probability of flipping ten heads in a row?  Use the rule of total probability:  
+
+$$
+P(D) = P(T) \cdot P(D \mid T) + P(\mbox{not $T$}) \cdot P(D \mid \mbox{not $T$}) \, .
+$$
+
+- $P(T)$ is 1/1025, so $P(\mbox{not T})$ is 1024/1025.  
+- $P(D \mid T) = 1$.    
+- $P(D \mid \mbox{not T})$ is the probability of a ten-heads "winning streak":
+
+$$
+P(D \mid \mbox{not $T$}) = \left(\frac{1}{2}\right)^{10} = \frac{1}{1024} \, .
+$$
+
+
+Bayes' Rule: a toy example
+=======
+
+We can now put all these pieces together:
+
+$$
+\begin{aligned}
+P(T \mid D) &= \frac{P(T) \cdot P(D \mid T) }
+{ P(T) \cdot P(D \mid T) + P(\mbox{not $T$}) \cdot P(D \mid \mbox{not $T$}) } \\
+&= \frac{ \frac{1}{1025} \cdot 1}
+{\frac{1}{1025} \cdot 1 + \frac{1024}{1025} \cdot \frac{1}{1024}  } = \frac{1/1025}{2/1025} \\
+&= \frac{1}{2} \, .
+\end{aligned}
+$$
+
+There is only a 50% chance that you are holding the two-headed coin.  Yes, flipping ten heads in a row with a normal coin is very unlikely (low likelihood).  But so is drawing the one two-headed coin from a jar of 1024 normal coins! (Low prior probability.)  
+
 

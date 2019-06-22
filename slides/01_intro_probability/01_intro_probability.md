@@ -14,6 +14,27 @@ transition: none
 
 
 
+Reference: Bertsekas Chapter 1  
+
+
+Outline
+=====
+
+-	Probability and conditional probability
+-	Probability models
+-	Set-theoretic concepts and notation
+-	Kolmogorov's rules and the multiplication rule
+-	Probability calculus and basic counting rule
+
+***
+
+-	Probabilities from data
+-	Rule of total probability 
+-	Independence
+-	Fallacy of mistaken compounding
+-	Bayes Rule
+
+
 
 Probability basics
 =========
@@ -29,7 +50,7 @@ And so on.
 Probability basics
 =========
 
-Some probabilities are estimated from experience over the long run:  
+Some probabilities are estimated from direct experience over the long run:  
 - P(newborn baby is a boy) = $\frac{106}{206}$  
 - P(death due to car accident) = $\frac{11}{100,000}$  
 - P(death due to any cause) = $1$  
@@ -77,8 +98,6 @@ Conditional probabilities are how we express judgments in a way that reflects ou
 - You just gave _Sherlock_ a high rating. What’s the conditional probability that you will like  _The Imitation Game_ or _Tinker Tailor Soldier Spy_?  
 - You just bought organic dog food on Amazon. What’s the conditional probability that you will also buy a GPS-enabled dog collar?  
 - You follow Lionel Messi (@leomessi) on Instagram. What’s the conditional probability that you will respond to a suggestion to follow Cristiano Ronaldo (@cristiano) or Gareth Bale (@garethbale11)?    
-
-The digital economy runs on $P(A \mid B)$!  
 
 
 Conditional probability  
@@ -366,7 +385,7 @@ Suppose a woman goes for regular screening (left branch).  What is P(survive | c
 - Of those 15, 12 are treated and survive, on average.
 - Thus inuitively, we should have P(survive | cancer) = 12/15 = 0.8
 
-Let's calculate this using the rule for conditional probabilities:
+We get the same answer using the rule for conditional probabilities:
  
 $$
 \begin{aligned}
@@ -400,7 +419,7 @@ Suppose we saw data on returning bombers that looked like this:
 
 <img src="fig/wald_table1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="550px" style="display: block; margin: auto;" />
 
-Naive answer: of 648 returning planes, 434 (68%) on the fuselage.  
+Naive answer: of 648 returning planes, 434 (68%) were hit on the fuselage.  
 
 $$
 P(\mbox{hit on wings or fuselage} \mid \mbox{returns home}) = 0.68
@@ -508,8 +527,20 @@ $$
 Result: a good recommendation with no human in the loop.  
 
 
+Conditional probabilities from data
+=========
+type: prompt  
+
+Let's try an example ourselves in `predimed_intro.R` from the class website.
+
+We'll use data from a large experiment to estimate:  
+- P(cardiac event | Mediterranean diet)
+- P(cardiac event | control diet)  
+
+
 The rule of total probability
 =========
+type: prompt
 
 Consider the following data on complication rates at a maternity hospital in Cambridge, England:
 
@@ -518,7 +549,7 @@ Consider the following data on complication rates at a maternity hospital in Cam
 | Senior doctors | 0.052 | 0.127  | 0.076 |
 | Junior doctors | 0.067  | 0.155  | 0.072 |
 
-So would you rather have a junior doctor or a senior doctor?  
+__So would you rather have a junior doctor or a senior doctor?__  
 
 
 The rule of total probability
@@ -531,7 +562,7 @@ Consider the following data on complication rates at an obstetrics ward in Engla
 | Senior doctors | 0.052 | 0.127  | 0.076 |
 | Junior doctors | 0.067  | 0.155  | 0.072 |
 
- So would you rather have a junior doctor or a senior doctor?  
+__So would you rather have a junior doctor or a senior doctor?__  
 
 _Simpson's paradox_.  Senior doctors have:  
 - lower complication rates for easy cases.  
@@ -714,7 +745,7 @@ Example: drug surveys
 
 The two sets of results were strikingly different.  
 - Of the 211 teens who provided a hair sample, only a tiny fraction of them (0.7%) admitted to having used cocaine.  
-- Bu when the hair samples were analyzed in the lab, 69 of them (33.7\%) came back positive for cocaine use.   
+- Bu when the hair samples were analyzed in the lab, 69 of them (33.7%) came back positive for cocaine use.   
 
 And the parents lied, too:  
 - The researchers also asked the parents whether they had used cocaine themselves.  
@@ -740,7 +771,7 @@ Drug surveys are really important:
 - The problem fills our jails, drains public finances, and perpetuates a trans-generational cycle of poverty.  
 - Getting good data on this problem is important! Doctors, schools, and governments all rely on self-reported measures of drug use to guide their thinking on this issue. 
 
-Delaney-Black's work seems to ask: __can we trust any of it?__
+Delaney-Black's asks: __can we trust any of it?__
  
  
 It's not just drug surveys
@@ -837,7 +868,7 @@ __Let's plug in our numbers on the right-hand side and get an answer!__  Feel fr
 Independence
 ============
 
-Two events $A$ and $B$ are said to be _independent_ if
+Two events $A$ and $B$ are _independent_ if
 
 $$
 P(A \mid B) = P(A \mid \mbox{not } B) = P(A)   
@@ -853,6 +884,76 @@ So if $A$ and $B$ are independent, then $P(A, B) = P(A) \cdot P(B)$.
 
 Independence
 ============
+
+Two events $A$ and $B$ are _conditionally independent_, given C, if
+
+$$
+P(A, B \mid C) = P(A \mid C) \cdot P(B \mid C)   
+$$
+
+$A$ and $B$ convey no information about each other, _once we know C_: $P(A \mid B , C) = P(A \mid C)$.    
+
+Neither independence nor conditional independence implies the other.  
+- It is possible for two outcomes to be _dependent_ and yet _conditionally independent_.  
+- Less intuitively, it is possible for two outcomes to be _independent_ and yet _conditionally dependent_.    
+
+
+Independence
+============
+
+Let's see an example.  Alice and Brianna live next door to each other and both commute to work on the same metro line.   
+
+- A = Alice is late for work.  
+- B = Brianna is late for work.  
+
+A and B are _dependent_: if Brianna is late for work, we might infer that the metro line was delayed or that their neighborhood had bad weather.   This means Alice is more likely to be late for work:  
+
+$$
+P(A \mid B) > P(A)
+$$    
+
+
+Independence
+============
+
+Now let's add some additional information:    
+
+- A = Alice is late for work.  
+- B = Brianna is late for work.   
+- C = The metro is running on time and the weather is clear.    
+
+A and B are _conditionally independent_, given C.  If Brianna is late for work but we know that the metro is running on time and the weather is clear, then we don't really learn anything about Alice's commute: 
+
+$$
+P(A \mid B, C) = P(A \mid C)
+$$   
+
+Independence
+============
+
+Same characters, different story:  
+
+- A = Alice has blue eyes.  
+- B = Brianna has blue eyes.  
+
+A and B are _independent_: Alice's eye color can't give us information about Brianna's.  
+
+
+Independence
+============
+
+Again, let's add some additional information.  
+
+- A = Alice has blue eyes.  
+- B = Brianna has blue eyes.  
+- C = Alice and Brianna are sisters.  
+
+A and B are _conditionally dependent_, given C: if Alice blue eyes, and we know that Brianna is her sister, then we know something about Brianna's genes.  It is now more likely that Brianna has blue eyes.   
+
+
+
+Independence
+============
 left: 40%
 
 <img src="fig/joe_dimaggio.jpg" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="325px" style="display: block; margin: auto;" />
@@ -860,7 +961,7 @@ left: 40%
 
 ***
 
-Independence is often something we _choose to assume_ for the purpose of making calculations easier.  For example:  
+Independence (or conditional independence) is often something we _choose to assume_ for the purpose of making calculations easier.  For example:  
 - Joe DiMaggio got a hit in about 80% of the baseball games he played in.  
 - Suppose that successive games are independent: if JD gets a hit today, it doesn't change the probability he's going to get a hit tomorrow.  
 - Then P(hit in game 1, hit in game 2) = $0.8 \cdot 0.8 = 0.64$.  
@@ -880,6 +981,8 @@ $$
 &\approx \frac{1}{250,000}
 \end{aligned}
 $$
+
+I like to call this the "compounding rule." 
 
 Independence
 ============
@@ -999,7 +1102,16 @@ For some specific numbers, let's make a diet analogy:
 - One day, you decide to give it up.  
 - But you're wary of crash diets, so you decide to go slowly: you'll forego that Tic-Tac only once every 10 days.  
 
-You've just reduced your average daily calorie consumption by about 1/100th of a percent.  Will you lose weight over the long run?  Probably not.  
+
+An example: surviving falls  
+============
+
+For some specific numbers, let's make a diet analogy:  
+- Imagine that every day you have a single mid-morning Tic-Tac, which has 2 calories.  
+- One day, you decide to give it up.  
+- But you're wary of crash diets, so you decide to go slowly: you'll forego that Tic-Tac only once every 10 days.  
+
+__You've just reduced your average daily calorie consumption by about 1/100th of a percent.__  Will you lose weight over the long run?  Probably not.  
 
 
 An example: surviving falls  
@@ -1036,7 +1148,9 @@ Solution:
 Example: the hot hand  
 ========
 
-<img src="fig/nbajam.jpg" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="650px" style="display: block; margin: auto;" />
+<img src="fig/nbajam.jpg" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="600px" style="display: block; margin: auto;" />
+
+NBA Jam c. 1993  
 
 Example: the hot hand  
 ========
@@ -1102,7 +1216,7 @@ Suppose we pick a random US family with four male children.  What is the probabi
 The probability that a randomly sampled US male is colorblind is about 8%.  So the naive answer involves just compounding up this probability:  
 
 $$
-P = 0.08^4 \approx 0.002  
+P = 0.08^4 \approx 0.0004  
 $$
 
 What's wrong here?  
@@ -1128,7 +1242,7 @@ $$
 P(\mbox{brother 2 colorblind} \mid \mbox{brother 1 colorblind}) = 0.5 \neq 0.08
 $$
 
-And the same is true for all subsequent brothers: if brother 1 is colorblind, you know that mom is a carrier, and so all her male children have a 50/50 chance of colorblindness.  
+And the same is true for all subsequent brothers: if brother 1 is colorblind, you know that mom is a carrier, and so all her male children have a 50/50 chance of colorblindness (conditional independence, given mom's genes!)  
 
 
 When independence goes wrong
@@ -1158,7 +1272,7 @@ When independence goes wrong
 
 Seems silly, right?
 
-But you'd be surprised at how often people make this mistake!  We might call this the "fallacy of mistaken compounding:" assuming events are independent and naively multiplying their probabilities.    
+But you'd be surprised at how often people make this mistake!  We might call this the "fallacy of mistaken compounding": assuming events are independent and naively multiplying their probabilities.    
 
 Out of class, I'm asking you to read two short pieces that illustrate this unfortunate reality:  
 
@@ -1217,16 +1331,16 @@ Bayes' Rule: a toy example
 
 She replies:
 
-> Look at my trading record.  I've been with the company for ten months, and in each of those ten months, my portfolio returns have been in the top half of all the portfolios managed by my peers on the trading floor.  If I were just an average trader, this would be very unlikely.  In fact, the probability that an average trader would see above-average results for ten months in a row is only $(1/2)^{10}$, which is less than one chance in a thousand.  Since it's unlikely I would be that lucky, the implication is that I am a talented trader, and I should therefore get a raise.
+> Look at my record: I'm the best trader on your floor.  I've been with the company for ten months, and in each of those ten months, my portfolio returns have been in the top half of all the portfolios managed by my peers on the trading floor.  If I were just one of those other average Joes, this would be very unlikely.  In fact, the probability that an average trader would see above-average results for ten months in a row is only $(1/2)^{10}$, which is less than one chance in a thousand.  Since it's unlikely I would be that lucky, I should get a raise.
 
 
 Bayes' Rule: a toy example
 =======
 
 __Is the trader lucky, or good?__  Same math as the big jar of quarters!  
-- Metaphorically, the trader is claiming to be a two-headed coin ($T$)  
+- Metaphorically, the trader is claiming to be the two-headed coin ($T$) in a sea of mediocrity.  
 - Her data is "D = ten heads in a row": she's performed above average for ten months straight.  
-- This is admittedly unlikely: $P(D \mid T) = 1/2^10 = 1/1024$. 
+- This is admittedly unlikely: $P(D \mid T) = 1/2^{10} = 1/1024$. 
 - But excellent performers are probably also rare, so that the prior probability $P(T)$ is pretty small to begin with.  
 
 To make an informed decision, you need to know $P(T \mid D)$: the posterior probability that the trader is an above-average performer, given the data.

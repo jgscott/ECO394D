@@ -29,7 +29,7 @@ In this first part of the course, we'll learn the mathematical foundations of pr
 Slides: [Introduction to Probability](http://rpubs.com/jgscott/intro_probability)  
 
 R scripts:  
-- [predimed_intro.R](r/predimed_intro.R)  
+- [predimed_intro.R](R/predimed_intro.R)  
 
 Two short pieces that illustrate the "fallacy of mistaken compounding":  
 - [How likely is it that birth control could let you down?](https://www.nytimes.com/interactive/2014/09/14/sunday-review/unplanned-pregnancies.html) from the _New York Times_  
@@ -43,15 +43,15 @@ Slides: [Discrete random variables](http://rpubs.com/jgscott/discrete_random_var
 
 
 R scripts:  
-- [poisson_binomial.R](r/poisson_binomial.R)  
+- [poisson_binomial.R](./R/poisson_binomial.R)  
 
 
 ### General random variables
 
 Slides: [General random variables](http://rpubs.com/jgscott/general_random_variables)   
 R scripts:  
-- [textmax_example.R](r/textmax_example.R)  
-- [normal_example.R](r/normal_example.R)  
+- [textmax_example.R](./r/textmax_example.R)  
+- [normal_example.R](./R/normal_example.R)  
 
 
 
@@ -74,9 +74,9 @@ Examples of [bad graphics](ref/badgraphics.pdf).
 
 Slides: [Introduction to Data Exploration](http://rpubs.com/jgscott/data_exploration)  
 R scripts and data:  
-- [mpg.R](r/mpg.R)  
-- [titanic.R](r/titanic.R) and [TitanicSurvival.csv](data/TitanicSurvival.csv)  
-- [toyimports_linegraph.R](r/toyimports_linegraph.R) and [toyimports.csv](data/toyimports.csv)  
+- [mpg.R](R/mpg.R)  
+- [titanic.R](R/titanic.R) and [TitanicSurvival.csv](data/TitanicSurvival.csv)  
+- [toyimports_linegraph.R](R/toyimports_linegraph.R) and [toyimports.csv](data/toyimports.csv)  
 
 
 Inspiration:  

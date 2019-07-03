@@ -1,6 +1,6 @@
 Introduction to probability
 ========================================================
-date: James Scott (UT-Austin)
+#date: James Scott (UT-Austin)
 autosize: true
 font-family: 'Gill Sans'
 transition: none
@@ -627,9 +627,7 @@ It turns out the math of Simpson's paradox can be understood a lot more deeply i
 
 This rule sounds fancy, but is actually quite simple.
 
-It says: __the probability of any event is the sum of the probabilities for all the different ways in which the event can happen.__   
-
-It's really just Kolmogorov's third rule in disguise!  
+It says to divide and conquer: __the probability of any event is the sum of the probabilities for all the different ways in which the event can happen.__   Really just Kolmogorov's third rule in disguise!  
 
 
 The rule of total probability
@@ -736,7 +734,6 @@ Now consider any event $A$.  Then
 $$
 P(A) = \sum_{i=1}^N P(A, B_i) = \sum_{i=1}^N P(B_i) \cdot P(A \mid B_i) \, .
 $$
-
 
 
 

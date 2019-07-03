@@ -1,0 +1,419 @@
+Data exploration
+===================
+#date: James Scott (UT-Austin) 
+autosize: true
+font-family: 'Gill Sans'
+transition: none
+
+
+<style>
+.small-code pre code {
+  font-size: 1em;
+}
+</style>
+
+```{r setup, echo=FALSE, display=FALSE}
+opts_chunk$set(cache=TRUE)
+```
+
+
+Reference: "Data Science" Chapter 1.
+
+
+
+Types of features in a data set
+================
+
+Categorical: the answer to a multiple choice question:
+- Chevy/Honday/Tesla
+- ice cream/cake/pie
+
+Ordinal: categorical, where the answers have an ordering but not a magnitude
+- Poor, Moderate, Good, Great
+- Private, Corporal, Lieutenant, Colonel, General
+
+Numerical: numbers, whether integer or real-valued
+- Beware the "faux numerical" ordinal scale  
+
+
+
+The basics of data exploration
+========
+
+
+
+- Boxplots
+- Scatter plots
+- Line graphs  
+- Faceting
+
+***
+
+- Grouping/piping/summarizing
+- Tables
+- Bar plots  
+- Histograms/density plots  
+
+
+
+
+Scatter plots 
+========
+class: small-code
+
+Here are several rows of a data frame about cars.  Every row is a car.  Every column is a feature describing the car.  
+
+```{r, fig.width = 8, fig.height = 4.5, fig.align='center', echo=FALSE}
+data(mpg)
+mosaic::sample(mpg, 6)
+```
+
+
+Scatter plots 
+========
+class: small-code
+
+For numerical data, our workhorse is the humble scatter plot. 
+
+```{r, fig.width = 8, fig.height = 4.5, fig.align='center', echo=TRUE}
+data(mpg)
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  theme_bw(base_size=18)
+```
+
+Scatter plots 
+========
+class: small-code
+
+There are lots of strategies for enriching a scatter plot with additional information.  We can color points according to a key...
+
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=FALSE}
+data(mpg)
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color=class)) + 
+  theme_bw(base_size=18)
+```
+
+Scatter plots: faceting
+========
+class: small-code
+
+Or _facet_ on a third variable...
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=FALSE}
+data(mpg)
+ggplot(data = filter(mpg, class!='2seater')) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(class~.) + 
+  theme_bw(base_size=18)
+```
+
+
+Line graphs
+========
+
+When it's important to emphasize continuity of a set of points (e.g. over time), use a line graph.  
+
+```{r, fig.width = 9, fig.height = 5, fig.align='center', echo=FALSE}
+toyimports = read.csv('./data/toyimports.csv')
+
+uk_toys = toyimports %>% filter(partner_name == 'United Kingdom') %>%
+  group_by(year) %>% summarize(toys = sum(US_report_import))
+
+ggplot(uk_toys) + 
+  geom_line(aes(x=year, y=toys), color='blue') + 
+  theme_bw(base_size=18) +
+  scale_x_continuous(breaks = 1996:2005)
+```
+
+Total value of toy imports from the United Kingdom over time (thousands USD).  Q: what might account for the big spikes?
+
+
+Line graphs
+========
+
+Actually, all those Harry Potter toys come from China...
+
+```{r, fig.width = 9, fig.height = 5, fig.align='center', echo=FALSE}
+toyimports = read.csv('./data/toyimports.csv')
+
+country_list = c('China', 'Korea, Rep.', 'United Kingdom')
+
+combined_toys = toyimports %>% filter(partner_name %in% country_list) %>%
+  group_by(year, partner_name) %>%
+  summarize(toys = sum(US_report_import))
+
+ggplot(combined_toys) + 
+  geom_line(aes(x=year, y=toys, color=partner_name)) +
+  theme_bw(base_size=18) +
+  scale_x_continuous(breaks = 1996:2005)
+```
+
+
+Line graphs
+========
+
+This is what logarthimic scales were invented for :-)
+
+```{r, fig.width = 9, fig.height = 5, fig.align='center', echo=FALSE}
+ggplot(combined_toys) + 
+  geom_line(aes(x=year, y=toys, color=partner_name)) +
+  theme_bw(base_size=18) +
+  scale_x_continuous(breaks = 1996:2005) + scale_y_log10()
+```
+
+Note: OK not to start this $y$ axis at 0, because we don't use height to judge relative size on a log scale.  
+
+
+
+Tables
+========
+class: small-code
+
+Here are the first several rows of a data frame about passengers on the Titanic.  Every row is a passenger.  Every column is a feature describing the passenger.  
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=FALSE}
+TitanicSurvival = read.csv('./data/TitanicSurvival.csv')
+head(TitanicSurvival)
+```
+
+We see both categorical (sex, passengerClass, survived) and numerical (age) variables.  
+
+Tables
+========
+class: small-code
+
+A natural thing might be to cross-tabulate survival by passenger class:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center'}
+xtabs(~survived + passengerClass, data=TitanicSurvival)
+```
+
+We're literally just counting how many passengers have each combination of features.  (If you know Excel: this is like a pivot table.)
+
+
+An side: piping
+========
+class: small-code
+
+A really useful operation is _piping._  Example:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center'}
+a = log(3)
+b = exp(a)
+c = sqrt(b)
+c
+```
+
+versus:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center'}
+a = log(3)
+a %>% exp() %>% sqrt()  
+```
+
+
+Tables
+========
+class: small-code
+
+We can pipe our table to `prop.table` to standardize along the columns (`margin=2`):
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center'}
+xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
+  prop.table(margin=2)
+```
+
+The result is a table of proportions, not counts, that sum to 1 along the columns.  
+
+
+Tables
+========
+class: small-code
+
+Seven decimal places seems overkill -- let's round to third decimal place by piping the the result to round:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center'}
+xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
+  prop.table(margin=2) %>%
+  round(3)
+```
+
+
+Tables
+========
+class: small-code
+
+If you pipe the result to the `kable` function, you'll get a prettier table (formatted in Markdown):  
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center'}
+library(knitr)
+xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
+  prop.table(margin=2) %>%
+  round(3) %>%
+  kable()
+```
+
+
+Bar plots
+========
+
+We can also turn this information into a bar plot.  
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=FALSE}
+d1 = TitanicSurvival %>%
+  group_by(passengerClass) %>%
+  summarize(surv_pct = sum(survived=='yes')/n())
+
+# now make a barplot of survival percentage by sex
+ggplot(data = d1) + 
+  geom_bar(mapping = aes(x=passengerClass, y=surv_pct), stat='identity') + 
+  theme_bw(base_size=18)
+```
+
+Remember to start your $y$-axis at 0!  
+
+Histograms
+========
+
+Now let's say we wanted to look at the distribution of ages on the Titanic.  
+
+```{r, fig.width = 7, fig.height = 5, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_histogram(aes(x=age), binwidth=5) + 
+  theme_bw(base_size=18) 
+```
+
+Our workhorse for this kind of thing is a histogram.  
+
+
+Histograms
+========
+
+We can change the bin width on a histogram (here 1, versus 5):
+
+```{r, fig.width = 7, fig.height = 5, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_histogram(aes(x=age), binwidth=1) + 
+  theme_bw(base_size=18) 
+```
+
+
+Histograms
+========
+
+We can also normalize the total area to sum to 1:  
+
+```{r, fig.width = 7, fig.height = 5, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_histogram(aes(x=age, stat(density)), binwidth=1) + 
+  theme_bw(base_size=18) 
+```
+
+This is called a density histogram.  It's like an estimated probability density.  
+
+
+Histograms
+========
+left: 35%
+
+We can also compare histograms across different levels of a categorical variable (recall this is _faceting_).  
+
+With raw counts, each histogram has a different total area.  
+
+***
+
+```{r, fig.width = 6, fig.height = 7, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_histogram(aes(x=age), binwidth=2) + 
+  facet_grid(passengerClass~.) +
+  theme_bw(base_size=18) 
+```
+
+
+Histograms
+========
+left: 35%
+
+In density form.
+
+Notice that now, each panel has total area 1.  
+
+***
+
+```{r, fig.width = 6, fig.height = 7, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_histogram(aes(x=age, stat(density)), binwidth=2) + 
+  facet_grid(passengerClass~.) +
+  theme_bw(base_size=18) 
+```
+
+
+Boxplots
+========
+
+Another way to compare data across categories is with a boxplot.
+- Each box shows the median and first/third quartiles.
+- By default, the whiskers extend 1.5 times the inter-quartile range.  Points outside these are shown individually.  
+
+```{r, fig.width = 8, fig.height = 4, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_boxplot(aes(x=passengerClass, y=age)) + 
+  theme_bw(base_size=18) 
+```
+
+
+Boxplots
+========
+
+Boxplots are preferred when there are lots of categories, because individual histograms can look cluttered.  
+
+```{r, fig.width = 9, fig.height = 5, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_boxplot(aes(x=passengerClass:survived, y=age)) + 
+  theme_bw(base_size=18) 
+```
+
+
+
+Violin plots
+========
+
+A violin plot is a variant; it attempts to show a bit more of the shape of each distribution.  
+
+```{r, fig.width = 9, fig.height = 5, fig.align='center', echo=FALSE}
+ggplot(data=TitanicSurvival) + 
+  geom_violin(aes(x=passengerClass:survived, y=age)) + 
+  theme_bw(base_size=18) 
+```
+
+The width of the violin is kind of like the height of the histogram.  
+
+
+Density plots
+========
+
+Another variant is the density plot, which is like a smooth version of a histogram:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=FALSE}
+ggplot(mpg, aes(x=cty)) + geom_density(aes(fill=factor(cyl)), alpha=0.6) +
+  labs(title="Density plot", 
+       subtitle="City Mileage vs Cylinders in Engine",
+       caption="Source: mpg data set in R",
+       x="City Gas Mileage",
+       fill="# Cylinders") + 
+  theme_bw(base_size=18)
+```
+
+
+To the code!
+======
+
+Let's look at the code examples in:  
+- `mpg.R`
+- `titanic.R`  
+- `toyimports_linegraph.R`
+
+

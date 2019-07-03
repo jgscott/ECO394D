@@ -1,6 +1,6 @@
 Discrete random variables  
 ===================
-date: James Scott (UT-Austin)
+#date: James Scott (UT-Austin)
 autosize: true
 font-family: 'Gill Sans'
 transition: none
@@ -17,7 +17,7 @@ opts_chunk$set(cache=TRUE)
 ```
 
 
-Reference: Bertsekas Chapter 2 (except 2.5-2.6)  
+Reference: Bertsekas Chapter 2.1, 2.2, 2.4  
 
 Outline
 =====
@@ -25,7 +25,6 @@ Outline
 -	Random variables  
 - Probability mass functions  
 -	Expectation and variance 
-- New random variables from old ones
 
  
 ***
@@ -33,7 +32,7 @@ Outline
 - Intro to parametric models: the Poisson distribution  
 - Independence of random variables  
 - The Bernoulli and binomial distributions  
-- Linear combinations of random variables  
+
 
 
 Random variables  
@@ -110,7 +109,7 @@ Random variables: big-picture
 =======
 
 Starting with some random outcome with sample space $\Omega$:  
-- A random variable is a real-valued function (i.e. numerical summary) of the outcome $\omega$.  
+- A random variable is a real-valued function (i.e. numerical summary) of the outcome $\omega$. Often this outcome fades into the background, but it's always there lurking.    
 - We describe the behavior of a random variable in terms of its _probability distribution_ $P$: a set of possible outcomes for the random variable, together with their probabilities.   
 - We can associate with each random variable certain "averages" or "moments" of interest (e.g. mean, variance).  
 - A function of a random variable defines another random variable.  
@@ -249,7 +248,7 @@ This example conveys something important about expected values.  Even if the wor
 - the "expected" American household size is 2.5 people   
 - a baseball player "expects"" to get 0.25 hits per at bat  
 - you "expect" to get 0.5 heads per coin flip.  
-- you "expect" that your newborn child will have one 0.485 ovaries (since 100/206 newborns are female).      
+- you "expect" that your newborn child will have one 0.97 ovaries (since 100/206 newborns are female).      
 
 Even if the underlying outcomes are all whole numbers, the expected value doesn't have to be.  
 
@@ -271,12 +270,12 @@ This measures the "center" or mean of the probability distribution.
 Expected value: definition  
 =======
 
-A nice interpretation here is that the expectation is like the "center of gravity" of a probability distribution.  Arrange each outcome $x_i$ along the real line, and place a mass equal to $P(X = x_i)$ at each point.  The expected value is the center of gravity, i.e. where the masses would balance like on a see-saw:  
-
 ```{r, out.width = "550px", fig.align='center', echo=FALSE}
 knitr::include_graphics("fig/center_of_mass.png")
 ```
 
+
+A nice interpretation here is that the expectation is like the "center of gravity" of a probability distribution.  Arrange each outcome $x_i$ along the real line, and place a mass equal to $P(X = x_i)$ at each point.  The expected value is the center of gravity, i.e. where the masses would balance like on a see-saw:  
 
 
 An aside: long-run averages
@@ -358,57 +357,6 @@ I get:
 - and thus a standard deviation of about 1.42 persons.  
 
 
-New random variables from old ones  
-=====
-
-Suppose $X$ is a random variable.  We can define a new random variable $Y = g(X)$.  For example:  
-- Let $X$ be tomorrow's high temperature in degrees Celsius  Then $Y = 1.8X + 32$ is tomorrow's high in degrees Fahrenheit.  
-- Let $X$ be your average speed in MPH on your 5-mile commute tomorrow.  Then $Y = 60 \cdot 5/X$ is the time in minutes it will take you to get to work.  
-- Let $X$ be the diameter of a well bore manufactured by a drilling company.  Then $Y = \pi \cdot (X/2)^2$ is the cross-sectional area of the drill.  
-
-
-New random variables from old ones  
-=====
-
-If $Y = g(X)$, then the PMF of $Y$ can be obtained directly from the PMF of $X$: 
-
-$$
-p_Y(y) = \sum_{x: g(x) = y} p_X(x)  
-$$
-
-In words: to obtain $p_Y(y)$ we add the probabilities of all values of $x$ such that $g(x) = y$.  
-
-
-New random variables from old ones  
-=====
-
-For linear functions, the rules for expectation and variance are easy.  Suppose that $X$ is some random variable, and that $Y = aX + b$ for constants $a$ and $b$.
-
-Then
-
-$$
-\begin{aligned}
-E(Y) &= E(aX + b) = a E(X) + b \quad \mbox{(Linearity of expectation)} \\
-\mbox{var}(Y) &= a^2 \ \mbox{var}(X) \\
-\mbox{sd}(Y) &= |a| \ \mbox{sd}(X)
-\end{aligned}  
-$$
-
-Let's prove this on the board using the linearity of expectation.    
-
-
-New random variables from old ones  
-=====
-
-For nonlinear functions, things are not as nice.  Suppose $X$ has PMF $p_X(x)$, and let $Y = g(X)$.  Then to calculate $E(Y)$, we have to go back to the PMF:   
-
-$$
-E(Y) = E(g(x)) = \sum_{x} g(x) p_X(x)  
-$$
-
-In words: the expectation of $g(X)$ is the weighted average outcome for $g(X)$, weighted by the probabilities.  
-
-
 A useful identity
 =====
 
@@ -420,6 +368,10 @@ $$
 & = E(X^2) - E(X)^2\, .
 \end{aligned}  
 $$
+
+- Let's prove this on the board.  
+- Maybe not super intuitive, but it is sometimes useful for calculating stuff.  
+
 
 
 
@@ -672,7 +624,6 @@ Your turn!  What is:
 To modify this sheet, you can use "File > Make a Copy" or download my Google sheet as an Excel file.  
 
 
-
 The Bernoulli distribution
 =======
 
@@ -739,9 +690,7 @@ Pretty simple!  Bernoulli random variables are much more interesting when we com
 The binomial distribution
 =======
 
-Our third example of a parametric probability model is the binomial distribution.
-
-Suppose that we observe the results of $N$ Bernoulli random variables.    
+Our third example of a parametric probability model is the binomial distribution.  Suppose that we observe the results of $N$ Bernoulli random variables.    
 - A coin is flipped ten times and it comes up heads (1) or tails (0) each time.    
 - A mortgage lender like UFCU has 100,000 borrowers, each of whom defaults (1) or not (0) on their payments.  
 - CNN conducts a poll of 1200 voters, asking each one whether they intend to vote for the incumbent (B=1) or not (B=0).  
@@ -781,7 +730,11 @@ $$
 p_X(k) = \binom{N}{k} p^x (1-p)^{N-k} \; , \quad \binom{N}{k} = \frac{N!}{k! (N-k)!}
 $$
 
-$\binom{N}{k}$ is the binomial coefficient, read aloud as "N choose k."  Note that here we use k, instead of x, to denote the possible outcomes of an integer-valued random variable.  
+$\binom{N}{k}$ is the binomial coefficient, read aloud as "N choose k."
+
+Facts (to be proven later):  
+- $E(X) = N p$  
+- $\mbox{var}(X) = Np(1-p)$  
 
 
 
@@ -933,6 +886,7 @@ P(X \geq 12) =  \sum_{k=12}^{140} p_X(k) \approx 0.613
 $$
 
 
+
 Trade-offs of the model
 =======
 
@@ -958,107 +912,9 @@ This second answer will always be context dependent:
 - Similar to the trade-off that engineers face when they build simplified models of bridges, jets, etc.  
 
 
+Poisson and binomial in R
+=======
 
-Linear combinations of RVs   
-====
+Let's dig in to `poisson_binomial.R` on the class website to see how we can use R to do calculations with the Poisson and binomial distributions.  
 
-Suppose that $X$ and $Y$ are two random variables associated with the same uncertain outcome. Define $g(X,Y) = aX + bY + c$, where a, b, and c are given scalars.  Then
-
-$$
-E(aX + bY + c) = aE(X) + bE(Y) + c  
-$$
-
-__The expectation of the sum is the sum of the expectations.__
-
-
-Linear combinations of RVs 
-====
-
-These ideas extend naturally to the case of more than two random variables.  For example, suppose that $X_1, X_2, \ldots, X_N$ are all different random variables.  Define
-
-$$
-Z = a_1 X_1 + a_2 X_2 + \cdots a_N X_N = \sum_{i=1}^N a_i X_i \\
-$$
-
-Again, __the expectation of the sum is the sum of the expectations:__
-
-$$
-E(Z) = E \left( \sum_{i=1}^N a_i X_i \right) = \sum_{i=1}^N a_i E(X_i)
-$$
-
-
-Linear combinations of RVs 
-====
-
-There's an analogous rule for the variance: again, let
-
-$$
-Z = a_1 X_1 + a_2 X_2 + \cdots a_N X_N = \sum_{i=1}^N a_i X_i \\
-$$
-
-__If $X_i$ and $X_j$ are independent for all $i\neq j$,__ then:  
-
-$$
-\mbox{var}(Z) = \mbox{var} \left( \sum_{i=1}^N a_i X_i \right) = \sum_{i=1}^N a_i^2 \mbox{var}(X_i)
-$$
-
-The independence assumption is important.  If it's not true, we need a more complex formula (later).  
-
-Example: the binomial
-====
-
-We can use these facts to calculate the mean and variance of the binomial.  
-
-Imagine trying to calculate these directly from the definition.  Suppose $X \sim$ Binomial(N, p).  Then from the definition of expected value, we have:  
-
-$$
-\begin{aligned}
-E(X) &= \sum_{k=1}^N k \cdot P(X = k) \\
- &= \sum_{k=1}^N k \cdot \binom{N}{k} p^k (1-p)^{N-k}  \, .
- \end{aligned}  
-$$
-
-What a giant algebra headache!  
-
-
-Example: the binomial
-====
-
-Instead, we can use our cute results for the expected value and variance of a linear combination.  
-
-We know that a binomial random variable is the number of 1's in a sequence of independent Bernoulli trials. So if $X \sim$ Binomial(N, p), then we can write $X$ as:
-
-$$
-X = B_1 + B_2 + B_3 + \cdots + B_N
-$$
-
-Example: the binomial
-====
-
-Now apply what we know:
-
-$$
-\begin{aligned}
-E(X) &= E(B_1 + B_2 + B_3 + \cdots + B_N) \\
-&= E(B_1) + E(B_2) + E(B_3) + \cdots + E(B_N) \\
-&= p + p + p + \cdots + p \quad \mbox{(N times)}\\
-&= Np
-\end{aligned}
-$$
-
-Example: the binomial
-====
-
-Similarly, since each $B_i$ is independent of the others,  
-
-$$
-\begin{aligned}
-\mbox{var}(X) &= \mbox{var}(B_1 + B_2 + B_3 + \cdots + B_N) \\
-&= \mbox{var}(B_1) + \mbox{var}(B_2) + \mbox{var}(B_3) + \cdots + \mbox{var}(B_N) \\
-&= p(1-p) + p(1-p) + p(1-p) + \cdots + p(1-p) \quad \mbox{(N times)}\\
-&= Np(1-p)  
-\end{aligned}
-$$
-
-So easy!  
 

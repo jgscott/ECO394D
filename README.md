@@ -49,10 +49,11 @@ R scripts:
 ### General random variables
 
 Slides: [General random variables](http://rpubs.com/jgscott/general_random_variables)   
+
 R scripts:  
 - [textmax_example.R](./r/textmax_example.R)  
 - [normal_example.R](./R/normal_example.R)  
-
+- [wellbore.R](./R/wellbore.R)   
 
 
 ### Multivariate distributions

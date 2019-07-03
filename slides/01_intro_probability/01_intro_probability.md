@@ -549,20 +549,20 @@ Consider the following data on complication rates at a maternity hospital in Cam
 | Senior doctors | 0.052 | 0.127  | 0.076 |
 | Junior doctors | 0.067  | 0.155  | 0.072 |
 
-__So would you rather have a junior doctor or a senior doctor?__  
+__Would you rather have a junior or senior doctor?__  
 
 
 The rule of total probability
 =========
 
-Consider the following data on complication rates at an obstetrics ward in England:
+Consider the following data on complication rates at a maternity hospital in Cambridge, England:
 
 | | Easier deliveries | Harder deliveries | Overall |
 |----------------|-------------|-------------|-------------|
 | Senior doctors | 0.052 | 0.127  | 0.076 |
 | Junior doctors | 0.067  | 0.155  | 0.072 |
 
-__So would you rather have a junior doctor or a senior doctor?__  
+__Would you rather have a junior or senior doctor?__  
 
 _Simpson's paradox_.  Senior doctors have:  
 - lower complication rates for easy cases.  

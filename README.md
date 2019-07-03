@@ -26,10 +26,15 @@ In this first part of the course, we'll learn the mathematical foundations of pr
 
 ### Introduction to probability  
 
-Slides: [Introduction to Data Exploration](http://rpubs.com/jgscott/intro_probability)  
+Slides: [Introduction to Probability](http://rpubs.com/jgscott/intro_probability)  
 
 R scripts:  
 - [predimed_intro.R](r/predimed_intro.R)  
+
+Two short pieces that illustrate the "fallacy of mistaken compounding":  
+- [How likely is it that birth control could let you down?](https://www.nytimes.com/interactive/2014/09/14/sunday-review/unplanned-pregnancies.html) from the _New York Times_  
+- An excerpt from Chapter 7 of [AIQ: How People and Machines are Smarter Together](https://github.com/jgscott/ECO394D/blob/master/ref/AIQ_excerpt_contraceptive_effectiveness.pdf), by Nick Polson and James Scott.    
+
 
 
 ### Discrete random variables

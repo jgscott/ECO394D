@@ -19,17 +19,17 @@ Reference: "Data Science" Chapter 2.
 
 
 
-Fitting equations
+Equations from data
 ========
 
 So far we've concentrated on relatively simple visual and numerical summaries of data sets.
 
-In many cases we will want to go further, by fitting an explicit equation, called a __regression model__ that describes how one variable ($y$) changes as a function of some other variables ($x$).  
+In many cases we will want to go further, by fitting an explicit equation, called a _regression model_ that describes how one variable ($y$) changes as a function of some other variables ($x$).  
 
-This is process is called _regression_ or _curve fitting._  
+This is process is called _regression_ or _curve fitting_: estimating the conditional expected value for $y$, given $x$.  
 
 
-Fitting equations
+Equations from data
 ========
 
 For example, you may have heard the following rule of thumb: to calculate your maximum heart rate, subtract your age from 220.
@@ -41,19 +41,19 @@ $$
 $$
 
 
-Fitting equations
+Equations from data
 ========
 
-This equation comes from _data_:  
+This equation comes from _data_.  The study probably went something like this:    
 - recruit a bunch of people of varying ages 
 - give them heart rate monitors  
 - tell them to run so hard on a treadmill that they feel like throwing up      
 - record their maximum heart rate  
 
-Data from this kind of experiment looks like this... 
+Data from this kind of study looks like this... 
 
 
-Fitting equations
+Equations from data
 ========
 
 <img src="fig/08_heart_rate.jpeg" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="700px" style="display: block; margin: auto;" />
@@ -62,13 +62,13 @@ It turns out that Equation 2 (MHR = 208 - 0.7 $\times$ Age) is a better equation
 
 
 
-Fitting equations
+Equations from data
 ========
 
 Top three reasons for fitting an equation: 
 - to make a prediction  
 - to summarize the trend in a data set  
-- to make fair comparisons that adjust for the systematic effect of some important variable  
+- to make fair comparisons that adjust for the systematic effect of some important variable.  (This is kind of like handicapping in golf.)    
 
 Our heart rate example illustrates all three of these concepts.
 
@@ -78,11 +78,13 @@ Making a prediction
 
 Alice is 28.  What is her predicted max heart rate?
 
-Our equation expresses the _conditional expected value_ of MHR, given a specific value of age:  
+Our equation expresses the _conditional expected value_ of MHR, given a known value of age:  
 
 $$
 \mbox{E(MHR | Age)} = 208 - 0.7 \cdot 28 = 188.4  
 $$
+
+This is our best guess without actually putting Alice on a treadmill test until she vomits.  
 
 
 Summarizing a trend  
@@ -94,7 +96,20 @@ $$
 \mbox{E(MHR | Age)}  = 208 - 0.7 \cdot \mbox{Age}
 $$
 
-So about 0.7 BPM slower, on average, with every additional year we age.  
+So about 0.7 BPM slower, on average, with every additional year we age. 
+
+This isn't a guarantee that _your_ MHR will decline at this rate; it's just a population-level average.  
+
+
+Making fair comparisons
+========
+
+A third, very common use of regression modeling is to make _fair comparisons_ that adjust for the systematic effect of some common variable.
+
+It's kind of like asking: [how big of a head start should The Freeze get?](https://www.youtube.com/watch?v=7asw5Vd8lIY)    
+
+<img src="fig/thefreeze.jpg" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="550px" style="display: block; margin: auto;" />
+
 
 
 Making fair comparisons
@@ -106,11 +121,13 @@ Let's compare two people whose max heart rates are measured using an actual trea
 
 Who has a higher maximum heart rate _for her age_?  
 
+To make things fair, we need to give Abigail a "head start" to account for age.  
+
 
 Making fair comparisons
 ========
 
-Key idea: compare actual MHR with predicted MHR.
+Key idea: compare actual MHR with expected MHR.
 
 Alice's actual MHR is 185, versus an expected MHR of 188.4 
 
@@ -126,7 +143,7 @@ $$
 Making fair comparisons
 ========
 
-Key idea: compare actual with predicted.
+Key idea: compare actual MHR with expected MHR.  
 
 Abigail's actual MHR is 173, versus an expected MHR of 169.5 
 
@@ -143,62 +160,36 @@ $$
 Making fair comparisons
 ========
 
-So Abigail has a lower MHR, but a higher _age-adjusted_ MHR. The equation that relates MHR to age tells us how to place everyone on a level playing field, regardless of age.  
+So Abigail has a lower absolute MHR, but a higher _age-adjusted_ MHR.  Her "head start" was the difference between her and Alice's expected MHRs: 188.4 - 169.5 = 18.9.  
 
-There are a lot of synonyms for this idea of making a "fair" comparison across different ages:  
-- adjusting for age  
-- statistically controlling for age  
-- holding age constant  
-
-
-
-Example: Austin food critics 
-=====
-class: small-code
-
-Here are a few lines from a data set on Austin restaurants c.2013:
+The equation that relates MHR to age shows us how to place everyone on a level playing field, regardless of age.  _Just look at differences from what's expected._  
+  
+There are a lot of synonyms for this idea of making a fair comparison across different values of $x$:  
+- adjusting for $x$  
+- statistically controlling for $x$  
+- holding $x$ constant  
 
 
-```
-                 Name            Type FoodScore FeelScore Price
-    Franklin Barbecue        Barbecue       9.5       5.5    15
-     Kerbey Lane Cafe      Vegefusion       6.5       8.5    20
-   Shoal Creek Saloon        Southern       4.6       8.5    25
-                 Uchi Japanese,Modern       9.8       8.5    85
- Second Bar + Kitchen          Modern       8.7       9.0    50
-             Lamberts    Southwestern       8.5       9.0    75
-```
-
-- Price = average price of dinner and drinks for one
-- FoodScore = critics' rating out of 10
-
-
-Example: Austin food critics 
+Fitting straight lines  
 =====
 
-<img src="fig/fearlesscritic1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="660px" style="display: block; margin: auto;" />
-
-$$
-\mbox{Price} = -6.2 + 7.9 \cdot \mbox{FoodScore} + \mbox{Error}
-$$
-
-
-Fitting straight lines
-=====
-
-In general, a linear model in one variable takes the form
+The workhorse here is a _linear model_:  
 
 $$
 y_i = \beta_0 + \beta_1 x_i + e_i
 $$
 
-where:  
+Notation:  
 - $i$ indexes each data point  
 - $y_i$ is the response and $x_i$ is the predictor (feature) for data point $i$  
 - $\beta_0$ and $\beta_1$ are the _parameters_ of the model.    
-- $e_i$ is the _model error_ or _residual_.  
+- $e_i$ is the _model error_ or _residual_, where $E(e_i) = 0$.  
+- The conditional expected value of $y$ is  
 
-"Fitting a model" = choosing $\beta_0$ and $\beta_1$ to make the model errors as small as possible on your data set.    
+$$
+\hat{y} = E(y \mid x) = \beta_0 + \beta_1 x  
+$$
+
 
 
 Fitting straight lines
@@ -240,6 +231,40 @@ Instead, let's focus on using the fitted equation for our three goals:
 - statistical adjustment: making fair comparisons that adjust for some systematic effect  
 
 
+
+Example: Austin food critics 
+=====
+class: small-code
+
+Here are a few lines from a data set on Austin restaurants c.2013:
+
+
+```
+                 Name            Type FoodScore FeelScore Price
+    Franklin Barbecue        Barbecue       9.5       5.5    15
+     Kerbey Lane Cafe      Vegefusion       6.5       8.5    20
+   Shoal Creek Saloon        Southern       4.6       8.5    25
+                 Uchi Japanese,Modern       9.8       8.5    85
+ Second Bar + Kitchen          Modern       8.7       9.0    50
+             Lamberts    Southwestern       8.5       9.0    75
+```
+
+- Price = average price of dinner and drinks for one
+- FoodScore = critics' rating out of 10
+
+
+Example: Austin food critics 
+=====
+
+Our fitted line (from OLS):  
+
+<img src="fig/fearlesscritic1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="660px" style="display: block; margin: auto;" />
+
+$$
+\mbox{Price} = -6.2 + 7.9 \cdot \mbox{FoodScore} + \mbox{Error}
+$$
+
+
 Making a prediction
 =====
 
@@ -251,7 +276,7 @@ What price would you expect the Austin market to support for an average meal at 
 Making a prediction: the algebra
 =====
 
-We know that $x = 7.5$.  Remember that our fitted equation expresses the _conditional expected value_ of $y$, given a specific value of $x$.  
+We know that $x = 7.5$.  Remember that our fitted equation expresses the _conditional expected value_ of $y$, for a known value of $x$.  
 
 So in light of our data on the Austin market, our best guess for price is
 
@@ -259,13 +284,13 @@ $$
 E(y \mid x = 7.5) = -6.2 + 7.9 \cdot 7.5 = 53.05
 $$
 
-This would be a sensible starting point for thinking about menu pricing.  
+Maybe a sensible starting point for thinking about pricing.  
 
 
 Making a prediction: the geometry
 =====
 
-<img src="fig/fearlesscritic3.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="860px" style="display: block; margin: auto;" />
+<img src="fig/fearlesscritic3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="860px" style="display: block; margin: auto;" />
 
 
 Summarizing a trend
@@ -293,7 +318,7 @@ Recall our key idea: compare actual with predicted.
 Statistical adjustment
 =====
 
-<img src="fig/fearlesscritic2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="860px" style="display: block; margin: auto;" />
+<img src="fig/fearlesscritic2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="860px" style="display: block; margin: auto;" />
 
 No surprises here: it's Franklin Barbecue!  Actual price is \$15 per person; predicted price is nearly \$70.  
 
@@ -313,12 +338,13 @@ Download the data in `creatinine.csv` from the course website.  Each row is a pa
 - age: patient's age in years.  
 - creatclear: patient's creatine clearance rate in mL/minute, a measure of kidney health (higher is better).  
 
+Load this data into RStudio and start with a blank script.   
 
 Your turn
 =====
 type: prompt
 
-Use this data to answer three questions:  
+Use this data, coupled with your knowledge of linear modeling, to answer three questions:  
   1. What creatinine clearance rate should we expect, on average, for a 55-year-old?  
   2. How does creatinine clearance rate change with age?  
   3. Whose creatinine clearance rate is healthier (higher) for their age: a 40-year-old with a rate of 135, or a 60-year-old with a rate of 112?  
@@ -327,23 +353,21 @@ Use this data to answer three questions:
 Beyond straight lines
 ========
 
-Ordinary least squares is for linear models.  However, we can also use OLS to fit certain kinds of _nonlinear_ models.  We'll focus on four:  
-- polynomial equations  
-- piecewise polynomial equations, a.k.a. _splines_
+Ordinary least squares is built for linear models.  However, we can also use OLS to fit certain kinds of _nonlinear_ models.  We'll focus on four:  
+- polynomial models    
+- piecewise polynomial models (_splines_)
 - exponential growth and decay  
 - power laws  
 
-These models are special:  
-- most nonlinear models cannot be fit using _ordinary_ least squares.  
-- they need a more general technique called _nonlinear least squares_, which is for a more advanced course.  
+These models are special!  (Most nonlinear models cannot be fit using _ordinary_ least squares.)  
 
 
 Polynomial models
 ========
 
-Data on gas consumption versyus temperature for a single-family house in Minnesota:  
+Data on gas consumption versus temperature for a single-family house in Minnesota:  
 
-<img src="fig/gas_consumption.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="860px" style="display: block; margin: auto;" />
+<img src="fig/gas_consumption.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="860px" style="display: block; margin: auto;" />
 
 The linear model doesn't fit so well!  
 
@@ -353,7 +377,7 @@ Polynomial models
 
 But a quadratic model does!  
 
-<img src="fig/gas_quadratic_fit.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="600px" style="display: block; margin: auto;" />
+<img src="fig/gas_quadratic_fit.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="600px" style="display: block; margin: auto;" />
 
 $$
 \mbox{Gas Bill} = \$289 - 6.4 \cdot \mbox{Temp} + 0.03 \cdot \mbox{Temp}^2 + \mbox{Residual} \, .
@@ -377,7 +401,7 @@ Polynomial models
 
 There is a temptation to get a better fit by choosing a larger $K$.  This can get ridiculous:  
 
-<img src="fig/gas_fitoverfit.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="900px" style="display: block; margin: auto;" />
+<img src="fig/gas_fitoverfit.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="900px" style="display: block; margin: auto;" />
 
 
 Polynomial models: over-fitting
@@ -396,7 +420,7 @@ Polynomial models: over-fitting
 ========
 
 
-<img src="fig/gas_extrapolate_poly.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="800px" style="display: block; margin: auto;" />
+<img src="fig/gas_extrapolate_poly.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="800px" style="display: block; margin: auto;" />
 
 In later courses, you'll learn formal diagnostics for over-fitting.  In the meantime: you'll pretty much know it when you see it. 
 
@@ -423,21 +447,21 @@ Here's some data on finishing times from runners in the 10-mile Cherry Blossom R
 
 ```
   state time  net age sex
-1    VA 7968 7789  27   F
-2    NY 5152 4740  51   M
-3    VA 4796 4581  29   F
-4    VA 6874 6488  32   F
-5    TN 6440 6280  31   F
-6    VA 6976 6699  23   M
-7    PA 5544 5281  54   M
-8    DC 3647 3645  39   M
+1    MD 3856 3849  35   M
+2    VA 6438 5986  26   F
+3    PA 6399 6083  39   M
+4    VA 6075 5854  40   M
+5    VA 4887 4461  42   M
+6    VA 6218 5885  33   M
+7    MD 4672 4672  42   M
+8    VA 5672 5300  35   M
 ```
 
 
 Polynomial models: splines
 ========
 
-<img src="06_fitting_equations-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
+<img src="06_fitting_equations-figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
 
 Three knots create four disjoint intervals (knots at the 25th, 50th, and 75th percentiles of temperature).  
 
@@ -446,11 +470,138 @@ Three knots create four disjoint intervals (knots at the 25th, 50th, and 75th pe
 Polynomial models: splines
 ========
 
-<img src="06_fitting_equations-figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
+<img src="06_fitting_equations-figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" style="display: block; margin: auto;" />
 
 Separate polynomials on each interval, glued together in a smooth fashion.  __What might explain the non-monotone behavior?__  (Code in `race_splines.R`.)  
 
 
 
+Exponential growth and decay  
+========
+
+An exponential growth or decay model looks like this:  
+
+$$
+y = \alpha e^{\beta_1 x}  
+$$
+
+where:
+- $\alpha$ is a baseline level of the response $y$ at $x=0$.  
+- $\beta_1$ describes the rate of growth ($+$) or decay ($-$) for a one-unit change in $x$.    
 
 
+Exponential growth and decay  
+========
+
+This formula comes from an analogy with continuously compounded interest.  Suppose you start with $\alpha$ dollars, invested at rate $\beta_1$ and compounded $n$ times annually.  Then after $t$ years, your investment is worth
+
+$$
+y = \alpha \left(1 + \frac{\beta_1}{n} \right)^{nt}  
+$$
+
+If we take the limit as $n$ gets large, we get
+
+$$
+y = \alpha e^{\beta_1 t}  
+$$
+
+
+Exponential growth and decay  
+========
+
+This is a non-linear model, but it's easy to fit using OLS!
+
+Here's the trick: if $y = \alpha e^{\beta_1 x}$, then
+
+$$
+\begin{aligned}
+\log(y) &= \log \left( \alpha e^{\beta_1 x} \right) \\
+ &= \log \alpha + \beta_1 x  
+\end{aligned}
+$$
+
+This is a linear function after all: not in $y$ versus $x$, but in $\log(y)$ versus $x$.  
+
+
+
+Exponential growth and decay  
+========
+
+This gives us a simple recipe: Fit a linear regression model where the $y$ variable has been log-transformed:  
+
+$$
+\log(y_i) = \beta_0 + \beta_1 x_i + e_i
+$$
+
+This tells us the parameters of our exponential growth or decay model:  
+- $\beta_0 = \log \alpha$, so $\alpha = e^{\beta_0}$ is the initial level of $y$ at $x=0$.  
+- $\beta_1$ is the growth rate per unit change in $x$.  
+
+__See example in `ebola.R`.__  
+
+
+
+Power laws
+========
+
+A similar trick works for power laws, where
+
+$$
+y = \alpha x^{\beta}  
+$$
+
+This is a very common model in microeconomics, where we often use power laws to model change in consumer demand as a function of price:  
+
+$$
+Q = K P^E
+$$
+
+where $Q$ is quantity demanded, $P$ is price, $E$ is [price elasticity of demand](https://en.wikipedia.org/wiki/Price_elasticity_of_demand#Optimal_pricing) (PED), and $K$ is a constant.  
+
+
+
+Exponential growth and decay  
+========
+
+We can git a model like this using OLS as well.  
+
+Here's the trick: if $y = \alpha x^{\beta_1}$, then
+
+$$
+\begin{aligned}
+\log(y) &= \log \left( \alpha x^{\beta_1} \right) \\
+ &= \log \alpha + \beta_1 \log(x)  
+\end{aligned}
+$$
+
+This is also linear function, in $\log(y)$ versus $\log(x)$.  
+
+
+
+Exponential growth and decay  
+========
+
+Now we fit a linear regression model with _both_ variables log-transformed:  
+
+$$
+\log(y_i) = \beta_0 + \beta_1 \log(x_i) + e_i
+$$
+
+This tells us the parameters of our exponential growth or decay model:  
+- $\beta_0 = \log \alpha$, so $\alpha = e^{\beta_0}$ is our leading constant.  
+- $\beta_1$ is the elasticity: if $x$ changes by 1%, then y changes by $\beta_1$%.    
+
+[See example on class website.](https://github.com/jgscott/learnR/blob/master/infmort/infmort.md)  
+
+
+
+Power laws
+========
+type: prompt
+
+Your turn!   In `milk.csv`, you're given a data set on consumer demand for milk, along with price.  Your ultimate goal is to answer the question: how much should the store charge for a carton of milk?  
+
+Let's dive in to the [case study on milk prices on the class website.](https://github.com/jgscott/learnR/blob/master/cases/milk/milk.md)
+ 
+ Remember: demand versus price often follows a power law!  
+ 

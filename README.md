@@ -107,7 +107,12 @@ R scripts and data:
 
 ## Part 3: Statistical inference
 
-
 ### Sampling distributions and the bootstrap
 
+### Basics of hypothesis testing  
+
 ### Bounds and limit theorems 
+
+### Inference based on normal theory  
+
+

@@ -4,7 +4,7 @@ All exercises are due at the beginning of the TA session on Friday of the week t
 
 [Exercises 1.](exercises01.md)  Due Friday, July 19th.  
 
-Exercises 2.
+[Exercises 2.](./homework02_ECO394D.pdf)  Due Friday, July 26th.  
 
 Exercises 3.
 

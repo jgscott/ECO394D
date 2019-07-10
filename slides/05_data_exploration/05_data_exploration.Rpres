@@ -49,8 +49,8 @@ The basics of data exploration
 
 ***
 
-- Grouping/piping/summarizing
 - Tables
+- Grouping/piping/summarizing
 - Bar plots  
 - Histograms/density plots  
 
@@ -75,7 +75,7 @@ class: small-code
 
 For numerical data, our workhorse is the humble scatter plot. 
 
-```{r, fig.width = 8, fig.height = 4.5, fig.align='center', echo=TRUE}
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=FALSE}
 data(mpg)
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) + 
@@ -194,7 +194,8 @@ xtabs(~survived + passengerClass, data=TitanicSurvival)
 We're literally just counting how many passengers have each combination of features.  (If you know Excel: this is like a pivot table.)
 
 
-An side: piping
+
+An aside: piping
 ========
 class: small-code
 
@@ -226,7 +227,8 @@ xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
   prop.table(margin=2)
 ```
 
-The result is a table of proportions, not counts, that sum to 1 along the columns.  
+Now you can compare survival proportions by passenger class.  
+
 
 
 Tables
@@ -246,7 +248,7 @@ Tables
 ========
 class: small-code
 
-If you pipe the result to the `kable` function, you'll get a prettier table (formatted in Markdown):  
+If you pipe the result to `kable`, you'll get a prettier table (formatted in Markdown):  
 
 ```{r, fig.width = 9, fig.height = 6, fig.align='center'}
 library(knitr)
@@ -255,6 +257,7 @@ xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
   round(3) %>%
   kable()
 ```
+
 
 
 Bar plots
@@ -275,12 +278,74 @@ ggplot(data = d1) +
 
 Remember to start your $y$-axis at 0!  
 
+
+Grouping and summarizing
+========
+class: small-code
+
+Another good use of tables is to display _summary statistics_ of numerical variables.  For example, here's how we'd use pipes to compute the average age by passsenger class:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=TRUE}
+TitanicSurvival %>%
+  group_by(passengerClass) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE))
+```
+
+Use `group_by` to group cases according to the `passengerClass` variable.  Then compute a summary statistic by averaging `age`.  (`na.rm = TRUE` tells R to ignore missing values.)
+
+
+
+Grouping and summarizing
+========
+class: small-code
+
+Now with two variables defining the groups:
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=TRUE}
+TitanicSurvival %>%
+  group_by(passengerClass, survived) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE))
+```
+
+This gives us a "flat" table.
+
+Grouping and summarizing
+========
+class: small-code
+
+If you want to un-flatten the table, use `spread`:  
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=TRUE}
+TitanicSurvival %>%
+  group_by(passengerClass, survived) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE)) %>%
+  spread(survived, mean_age)
+```
+
+`spread` says to spread out the levels of the `survived` variables along the columns of the table and put the `mean_age` variable in each entry.  
+
+
+Grouping and summarizing
+========
+class: small-code
+
+You can compute lots of summary statistics this way:  
+
+```{r, fig.width = 9, fig.height = 6, fig.align='center', echo=TRUE}
+TitanicSurvival %>%
+  group_by(passengerClass) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE),
+            sd_age = sd(age,na.rm=TRUE), 
+            max_age = max(age,na.rm=TRUE))
+```
+
+
 Histograms
 ========
 
-Now let's say we wanted to look at the distribution of ages on the Titanic.  
+Now let's say we wanted to look at the _full_ distribution of ages on the Titanic (i.e. not just a summary like the average).  
 
-```{r, fig.width = 7, fig.height = 5, fig.align='center', echo=FALSE}
+```{r, fig.width = 8, fig.height = 5, fig.align='center', echo=FALSE}
 ggplot(data=TitanicSurvival) + 
   geom_histogram(aes(x=age), binwidth=5) + 
   theme_bw(base_size=18) 
@@ -294,7 +359,7 @@ Histograms
 
 We can change the bin width on a histogram (here 1, versus 5):
 
-```{r, fig.width = 7, fig.height = 5, fig.align='center', echo=FALSE}
+```{r, fig.width = 8, fig.height = 5, fig.align='center', echo=FALSE}
 ggplot(data=TitanicSurvival) + 
   geom_histogram(aes(x=age), binwidth=1) + 
   theme_bw(base_size=18) 
@@ -306,7 +371,7 @@ Histograms
 
 We can also normalize the total area to sum to 1:  
 
-```{r, fig.width = 7, fig.height = 5, fig.align='center', echo=FALSE}
+```{r, fig.width = 8, fig.height = 5, fig.align='center', echo=FALSE}
 ggplot(data=TitanicSurvival) + 
   geom_histogram(aes(x=age, stat(density)), binwidth=1) + 
   theme_bw(base_size=18) 
@@ -406,6 +471,16 @@ ggplot(mpg, aes(x=cty)) + geom_density(aes(fill=factor(cyl)), alpha=0.6) +
        fill="# Cylinders") + 
   theme_bw(base_size=18)
 ```
+
+
+Take-home skills
+========
+
+We've covered:  
+- data types (categorica/ordinal/numerical)  
+- cross tabulation and contingency tables
+- some basic plots (bar charts, scatter plots, line graphs, histograms and their variations)  
+- basics of data workflow (pipe/group/summarize)    
 
 
 To the code!

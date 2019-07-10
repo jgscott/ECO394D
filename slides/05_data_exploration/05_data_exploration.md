@@ -47,8 +47,8 @@ The basics of data exploration
 
 ***
 
-- Grouping/piping/summarizing
 - Tables
+- Grouping/piping/summarizing
 - Bar plots  
 - Histograms/density plots  
 
@@ -81,14 +81,6 @@ Scatter plots
 class: small-code
 
 For numerical data, our workhorse is the humble scatter plot. 
-
-
-```r
-data(mpg)
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy)) + 
-  theme_bw(base_size=18)
-```
 
 <img src="05_data_exploration-figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
@@ -179,7 +171,8 @@ survived 1st 2nd 3rd
 We're literally just counting how many passengers have each combination of features.  (If you know Excel: this is like a pivot table.)
 
 
-An side: piping
+
+An aside: piping
 ========
 class: small-code
 
@@ -229,7 +222,8 @@ survived       1st       2nd       3rd
      yes 0.6191950 0.4296029 0.2552891
 ```
 
-The result is a table of proportions, not counts, that sum to 1 along the columns.  
+Now you can compare survival proportions by passenger class.  
+
 
 
 Tables
@@ -257,7 +251,7 @@ Tables
 ========
 class: small-code
 
-If you pipe the result to the `kable` function, you'll get a prettier table (formatted in Markdown):  
+If you pipe the result to `kable`, you'll get a prettier table (formatted in Markdown):  
 
 
 ```r
@@ -276,6 +270,7 @@ xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
 |yes | 0.619| 0.43| 0.255|
 
 
+
 Bar plots
 ========
 
@@ -285,12 +280,119 @@ We can also turn this information into a bar plot.
 
 Remember to start your $y$-axis at 0!  
 
+
+Grouping and summarizing
+========
+class: small-code
+
+Another good use of tables is to display _summary statistics_ of numerical variables.  For example, here's how we'd use pipes to compute the average age by passsenger class:
+
+
+```r
+TitanicSurvival %>%
+  group_by(passengerClass) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE))
+```
+
+```
+# A tibble: 3 x 2
+  passengerClass mean_age
+  <fct>             <dbl>
+1 1st                39.2
+2 2nd                29.5
+3 3rd                24.8
+```
+
+Use `group_by` to group cases according to the `passengerClass` variable.  Then compute a summary statistic by averaging `age`.  (`na.rm = TRUE` tells R to ignore missing values.)
+
+
+
+Grouping and summarizing
+========
+class: small-code
+
+Now with two variables defining the groups:
+
+
+```r
+TitanicSurvival %>%
+  group_by(passengerClass, survived) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE))
+```
+
+```
+# A tibble: 6 x 3
+# Groups:   passengerClass [3]
+  passengerClass survived mean_age
+  <fct>          <fct>       <dbl>
+1 1st            no           43.2
+2 1st            yes          36.8
+3 2nd            no           33.2
+4 2nd            yes          24.9
+5 3rd            no           26.0
+6 3rd            yes          21.5
+```
+
+This gives us a "flat" table.
+
+Grouping and summarizing
+========
+class: small-code
+
+If you want to un-flatten the table, use `spread`:  
+
+
+```r
+TitanicSurvival %>%
+  group_by(passengerClass, survived) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE)) %>%
+  spread(survived, mean_age)
+```
+
+```
+# A tibble: 3 x 3
+# Groups:   passengerClass [3]
+  passengerClass    no   yes
+  <fct>          <dbl> <dbl>
+1 1st             43.2  36.8
+2 2nd             33.2  24.9
+3 3rd             26.0  21.5
+```
+
+`spread` says to spread out the levels of the `survived` variables along the columns of the table and put the `mean_age` variable in each entry.  
+
+
+Grouping and summarizing
+========
+class: small-code
+
+You can compute lots of summary statistics this way:  
+
+
+```r
+TitanicSurvival %>%
+  group_by(passengerClass) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE),
+            sd_age = sd(age,na.rm=TRUE), 
+            max_age = max(age,na.rm=TRUE))
+```
+
+```
+# A tibble: 3 x 4
+  passengerClass mean_age sd_age max_age
+  <fct>             <dbl>  <dbl>   <dbl>
+1 1st                39.2   14.5      80
+2 2nd                29.5   13.6      70
+3 3rd                24.8   12.0      74
+```
+
+
 Histograms
 ========
 
-Now let's say we wanted to look at the distribution of ages on the Titanic.  
+Now let's say we wanted to look at the _full_ distribution of ages on the Titanic (i.e. not just a summary like the average).  
 
-<img src="05_data_exploration-figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" style="display: block; margin: auto;" />
 
 Our workhorse for this kind of thing is a histogram.  
 
@@ -300,7 +402,7 @@ Histograms
 
 We can change the bin width on a histogram (here 1, versus 5):
 
-<img src="05_data_exploration-figure/unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" style="display: block; margin: auto;" />
 
 
 Histograms
@@ -308,7 +410,7 @@ Histograms
 
 We can also normalize the total area to sum to 1:  
 
-<img src="05_data_exploration-figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" />
 
 This is called a density histogram.  It's like an estimated probability density.  
 
@@ -323,7 +425,7 @@ With raw counts, each histogram has a different total area.
 
 ***
 
-<img src="05_data_exploration-figure/unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" style="display: block; margin: auto;" />
 
 
 Histograms
@@ -336,7 +438,7 @@ Notice that now, each panel has total area 1.
 
 ***
 
-<img src="05_data_exploration-figure/unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" style="display: block; margin: auto;" />
 
 
 Boxplots
@@ -346,7 +448,7 @@ Another way to compare data across categories is with a boxplot.
 - Each box shows the median and first/third quartiles.
 - By default, the whiskers extend 1.5 times the inter-quartile range.  Points outside these are shown individually.  
 
-<img src="05_data_exploration-figure/unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" style="display: block; margin: auto;" />
 
 
 Boxplots
@@ -354,7 +456,7 @@ Boxplots
 
 Boxplots are preferred when there are lots of categories, because individual histograms can look cluttered.  
 
-<img src="05_data_exploration-figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" style="display: block; margin: auto;" />
 
 
 
@@ -363,7 +465,7 @@ Violin plots
 
 A violin plot is a variant; it attempts to show a bit more of the shape of each distribution.  
 
-<img src="05_data_exploration-figure/unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-27-1.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" style="display: block; margin: auto;" />
 
 The width of the violin is kind of like the height of the histogram.  
 
@@ -373,7 +475,17 @@ Density plots
 
 Another variant is the density plot, which is like a smooth version of a histogram:
 
-<img src="05_data_exploration-figure/unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" style="display: block; margin: auto;" />
+<img src="05_data_exploration-figure/unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" style="display: block; margin: auto;" />
+
+
+Take-home skills
+========
+
+We've covered:  
+- data types (categorica/ordinal/numerical)  
+- cross tabulation and contingency tables
+- some basic plots (bar charts, scatter plots, line graphs, histograms and their variations)  
+- basics of data workflow (pipe/group/summarize)    
 
 
 To the code!

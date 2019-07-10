@@ -3,11 +3,20 @@ library(tidyverse)
 TitanicSurvival = read.csv('../data/TitanicSurvival.csv')
 summary(TitanicSurvival)
 
-# a bit un-interesting
-ggplot(data = TitanicSurvival) + 
-  geom_bar(mapping = aes(x = survived))
+# Our basic contingency table of proportions
+xtabs(~survived + passengerClass, data=TitanicSurvival) %>%
+  prop.table(margin=2)
 
-# Let's create a new data set of survival percentages
+# prettier formatting
+t1 = xtabs(~survived + passengerClass, data=TitanicSurvival)
+
+t1 %>%
+  prop.table(margin=2) %>%
+  kable
+
+
+
+# Same basic pipeline can create a new table of survival percentages
 # We'll group by sex and summarize by percentage
 d1 = TitanicSurvival %>%
   group_by(sex) %>%
@@ -19,6 +28,28 @@ ggplot(data = d1) +
   geom_bar(mapping = aes(x=sex, y=surv_pct), stat='identity')
 
 
+###
+# tables of summary statistics
+###
+
+# mean age by class
+TitanicSurvival %>%
+  group_by(passengerClass) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE))
+
+
+# grouping by two variables and spreading one across the columns
+TitanicSurvival %>%
+  group_by(passengerClass, survived) %>%
+  summarize(mean_age = mean(age,na.rm=TRUE)) %>%
+  spread(survived, mean_age)
+
+
+
+###
+# visualizing distributions
+###
+
 # histogram
 ggplot(data=TitanicSurvival) + 
   geom_histogram(aes(x=age))
@@ -28,7 +59,7 @@ ggplot(data=TitanicSurvival) +
   geom_histogram(aes(x=age, stat(density)), binwidth=2)
 
 
-# stratified by passenger class
+# faceting by passenger class
 ggplot(data=TitanicSurvival) + 
   geom_histogram(aes(x=age, stat(density)), binwidth=2) + 
   facet_grid(passengerClass~.) +
@@ -44,6 +75,9 @@ ggplot(data=TitanicSurvival) +
 ggplot(data=TitanicSurvival) + 
   geom_violin(aes(x=passengerClass:survived, y=age)) + 
   theme_bw(base_size=18) 
+
+
+
 
 
 ###
@@ -85,6 +119,7 @@ d3 = TitanicSurvival %>%
 d3
 
 # Now make a pretty plot
+# four variables on a 2-D screen and yet still readable!
 ggplot(data = d3) + 
   geom_bar(mapping = aes(x=passengerClass, y=surv_pct, fill=agecat),
            stat='identity', position ='dodge') + 
@@ -93,4 +128,16 @@ ggplot(data = d3) +
        y="Fraction surviving",
        x = "Passenger Class",
        fill="Age")
+
+
+# An entirely different organization of the same information
+ggplot(data = d3) + 
+  geom_bar(mapping = aes(x=agecat, y=surv_pct, fill=sex),
+           stat='identity', position ='dodge') + 
+  facet_wrap(~passengerClass) + 
+  labs(title="Survival on the Titanic", 
+       y="Fraction surviving",
+       x = "Age",
+       fill="Sex")
+
 

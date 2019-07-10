@@ -74,6 +74,7 @@ Topics: data visualization and practice with R.  Bar plots; basic plots for nume
 Examples of [bad graphics](ref/badgraphics.pdf).  
 
 Slides: [Introduction to Data Exploration](http://rpubs.com/jgscott/data_exploration)  
+
 R scripts and data:  
 - [mpg.R](R/mpg.R)  
 - [titanic.R](R/titanic.R) and [TitanicSurvival.csv](data/TitanicSurvival.csv)  
@@ -91,7 +92,11 @@ Inspiration:
 
 ### Fitting equations to data
 
-
+Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)  
+  
+R scripts and data:    
+- [afc.R](./r/afc.R) and [afc.csv](data/afc.csv)
+- [creatinine.csv](data/creatinine.csv)  
 
 
 

@@ -30,9 +30,9 @@ Suppose someone tests positive. What is the probability that they have the disea
 
 Go read the article ["One match to go!"](http://faculty.chicagobooth.edu/nicholas.polson/teaching/41000/speigelhalter-epl.pdf) by Spiegelhalter and Ng.  They describe how they formulated an approach for predicting the probability of different outcomes for soccer matches based on "attack strength" and "defense weakness."  It is better than the simple approach we took in class, though probably not as good as what actual bookies use.
 
-Now go get data from this previous year's English Premiere League soccer season.  For example, you can certainly [find it here](http://www.soccerstats.com/latest.asp?league=england).  You can get home/away splits by clicking on ``Home/Away'' under the ``Statistics'' button.   Explain Spiegelhalter and Ng's approach in your own words, and replicate it using this year's data. (This is probably easiest to do in Excel, although you can certainly use R or similar if you want.)  
-- What is your estimated probability distribution of likely results for a match between Liverpool (home) and Tottenham (away)?   
-- What about Manchester United (home) versus Manchester City (away)?  
+Now go get data from this previous year's English Premiere League soccer season.  For example, you can certainly [find it here](http://www.soccerstats.com/latest.asp?league=england).  You can get home/away splits by clicking on `Home/Away` under the `Statistics` button.   Explain Spiegelhalter and Ng's approach in your own words, and replicate it using this year's data to predict results for the following two matches?  
+- What is your probability distribution of likely results for a match between Liverpool (home) and Tottenham (away)?   What is the single most likely score?  
+- What is your probability distribution of likely results for Manchester United (home) versus Manchester City (away)?  What is the single most likely score? 
 
-You don't need the break down the results by score; just summarize the probability of win/lose/draw.  (Note: Spiegelhalter and Ng did the calculations for the whole League, but you certainly don't need to; these two games will suffice.)  Also, it's fine to assume independence between the teams' scores.
+This is probably easiest to do in Excel, although you can certainly use R or similar if you want.  You don't need the break down the results by all possible scores; just summarize the probability of win/lose/draw, in addition to the most likely result.  Note: Spiegelhalter and Ng did the calculations for the whole League, but you certainly don't need to; these two games will suffice.  Also, it's fine to assume independence between the teams' scores.
 

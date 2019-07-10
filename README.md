@@ -11,6 +11,11 @@ This class is about gaining knowledge from data and about understanding random p
 There's also an important intermediate-term goal: prep you for Econometrics this upcoming academic year.  
 
 
+## Exercises
+
+I will post [all exercises here](exercises/).  
+
+
 ## Software
 
 Please install [R](http://www.r-project.org) and then [RStudio](http://www.rstudio.org) on your own computer.  Detailed instructions for installing these two programs [can be found here](https://github.com/jgscott/learnR/blob/master/basics/installing_R.md).  Both are free.

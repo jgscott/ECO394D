@@ -34,7 +34,7 @@ This is process is called _regression_ or _curve fitting_: estimating the condit
 Equations from data
 ========
 
-For example, you may have heard the following rule of thumb: to calculate your maximum heart rate, subtract your age from 220.
+For example, you may have heard the following rule of thumb: to calculate your maximum heart rate, [subtract your age from 220](https://www.active.com/fitness/calculators/heartrate).
 
 We can express this rule as an equation:  
 
@@ -112,10 +112,29 @@ A third, very common use of regression modeling is to make _fair comparisons_ th
 
 It's kind of like asking: [how big of a head start should The Freeze get?](https://www.youtube.com/watch?v=7asw5Vd8lIY)    
 
-```{r, out.width = "550px", fig.align='center', echo=FALSE}
-knitr::include_graphics("fig/thefreeze.jpg")
+```{r, out.width = "600px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/thefreeze.png")
 ```
 
+
+Making fair comparisons
+========
+
+```{r, out.width = "900px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/thefreeze_bolt.png")
+```
+
+
+Making fair comparisons
+========
+
+This is not a fair race!  
+- The Freeze is a former college track star who missed the U.S. Olympic team by 0.02 seconds.  
+- The other guy is a random fan in a Braves t-shirt.  
+
+To the make the race "fair" (and thus interesting), we need to adjust for how fast we _expect_ these guys to run, given what we know about them.
+
+__Key fact: regression models are great at estimating conditional expectations.__
 
 
 Making fair comparisons
@@ -125,9 +144,9 @@ Let's compare two people whose max heart rates are measured using an actual trea
 - Alice is 28 with a maximum heart rate of 185.  
 - Abigail is 55 with a maximum heart rate of 174.  
 
-Who has a higher maximum heart rate _for her age_?  
+Clearly Alice has a higher MHR, but let's make things fair!  We need to give Abigail a "head start," since max heart rate declines with age.  
 
-To make things fair, we need to give Abigail a "head start" to account for age.  
+So who has a higher maximum heart rate _for her age_?  
 
 
 Making fair comparisons
@@ -151,11 +170,11 @@ Making fair comparisons
 
 Key idea: compare actual MHR with expected MHR.  
 
-Abigail's actual MHR is 173, versus an expected MHR of 169.5 
+Abigail's actual MHR is 174, versus an expected MHR of 169.5 
 
 $$
 \begin{aligned}
-\mbox{Actual} - \mbox{Predicted} &= 185 - (208 - 0.7 \cdot 55) \\
+\mbox{Actual} - \mbox{Predicted} &= 174 - (208 - 0.7 \cdot 55) \\
 &= 174 - 169.5 \\
 & = 4.5
 \end{aligned}
@@ -168,12 +187,13 @@ Making fair comparisons
 
 So Abigail has a lower absolute MHR, but a higher _age-adjusted_ MHR.  Her "head start" was the difference between her and Alice's expected MHRs: 188.4 - 169.5 = 18.9.  
 
-The equation that relates MHR to age shows us how to place everyone on a level playing field, regardless of age.  _Just look at differences from what's expected._  
-  
-There are a lot of synonyms for this idea of making a fair comparison across different values of $x$:  
+The equation that relates MHR to age shows us how to place everyone on a level playing field, regardless of age.  There are a lot of synonyms for this idea:  
 - adjusting for $x$  
 - statistically controlling for $x$  
 - holding $x$ constant  
+
+It's all just subtraction! __Compare the difference between actual and expected outcomes.__
+
 
 
 Fitting straight lines  
@@ -507,6 +527,18 @@ p1 + geom_vline(xintercept = q_temp) +
 
 Separate polynomials on each interval, glued together in a smooth fashion.  __What might explain the non-monotone behavior?__  (Code in `race_splines.R`.)  
 
+
+
+Polynomial models: splines
+========
+
+There are probably at least two things going on here:  
+- actual non-monotonicity: runners reach their physical peak fairly late compared to other athletes (sometime in their 30s or 40s).  
+- survivorship bias: only the more serious runners are still running in their late 30s and through their 40s.  
+
+Bottom line: the flexible piece-wise polynomial (spline) model allowed us to __practice good data science__.  We could:  
+- see these subtle effects in the data.  
+- form theories about what might be causing them.  
 
 
 Exponential growth and decay  

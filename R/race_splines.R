@@ -15,6 +15,12 @@ ggplot(TenMileRace) +
 # choose knot locations: 25th, 50th and 7th percentiles of age
 my_knots = quantile(TenMileRace$age, prob=c(0.25,0.5,0.75))
 
+# # Or K intervals
+# K=7
+# my_knots = quantile(TenMileRace$age, prob=seq(1/K, 1-1/K, by=1/K))
+
+
+
 # piecewise quadratic (degree=2) with knots at the specified locations
 # note: bs stands for "b-splines"
 spline_model = lm(net ~ splines::bs(age, degree=2, knots=my_knots), data=TenMileRace)

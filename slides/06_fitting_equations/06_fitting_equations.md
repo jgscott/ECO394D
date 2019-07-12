@@ -32,7 +32,7 @@ This is process is called _regression_ or _curve fitting_: estimating the condit
 Equations from data
 ========
 
-For example, you may have heard the following rule of thumb: to calculate your maximum heart rate, subtract your age from 220.
+For example, you may have heard the following rule of thumb: to calculate your maximum heart rate, [subtract your age from 220](https://www.active.com/fitness/calculators/heartrate).
 
 We can express this rule as an equation:  
 
@@ -108,8 +108,25 @@ A third, very common use of regression modeling is to make _fair comparisons_ th
 
 It's kind of like asking: [how big of a head start should The Freeze get?](https://www.youtube.com/watch?v=7asw5Vd8lIY)    
 
-<img src="fig/thefreeze.jpg" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="550px" style="display: block; margin: auto;" />
+<img src="fig/thefreeze.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="600px" style="display: block; margin: auto;" />
 
+
+Making fair comparisons
+========
+
+<img src="fig/thefreeze_bolt.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="900px" style="display: block; margin: auto;" />
+
+
+Making fair comparisons
+========
+
+This is not a fair race!  
+- The Freeze is a former college track star who missed the U.S. Olympic team by 0.02 seconds.  
+- The other guy is a random fan in a Braves t-shirt.  
+
+To the make the race "fair" (and thus interesting), we need to adjust for how fast we _expect_ these guys to run, given what we know about them.
+
+__Key fact: regression models are great at estimating conditional expectations.__
 
 
 Making fair comparisons
@@ -119,9 +136,9 @@ Let's compare two people whose max heart rates are measured using an actual trea
 - Alice is 28 with a maximum heart rate of 185.  
 - Abigail is 55 with a maximum heart rate of 174.  
 
-Who has a higher maximum heart rate _for her age_?  
+Clearly Alice has a higher MHR, but let's make things fair!  We need to give Abigail a "head start," since max heart rate declines with age.  
 
-To make things fair, we need to give Abigail a "head start" to account for age.  
+So who has a higher maximum heart rate _for her age_?  
 
 
 Making fair comparisons
@@ -145,11 +162,11 @@ Making fair comparisons
 
 Key idea: compare actual MHR with expected MHR.  
 
-Abigail's actual MHR is 173, versus an expected MHR of 169.5 
+Abigail's actual MHR is 174, versus an expected MHR of 169.5 
 
 $$
 \begin{aligned}
-\mbox{Actual} - \mbox{Predicted} &= 185 - (208 - 0.7 \cdot 55) \\
+\mbox{Actual} - \mbox{Predicted} &= 174 - (208 - 0.7 \cdot 55) \\
 &= 174 - 169.5 \\
 & = 4.5
 \end{aligned}
@@ -162,12 +179,13 @@ Making fair comparisons
 
 So Abigail has a lower absolute MHR, but a higher _age-adjusted_ MHR.  Her "head start" was the difference between her and Alice's expected MHRs: 188.4 - 169.5 = 18.9.  
 
-The equation that relates MHR to age shows us how to place everyone on a level playing field, regardless of age.  _Just look at differences from what's expected._  
-  
-There are a lot of synonyms for this idea of making a fair comparison across different values of $x$:  
+The equation that relates MHR to age shows us how to place everyone on a level playing field, regardless of age.  There are a lot of synonyms for this idea:  
 - adjusting for $x$  
 - statistically controlling for $x$  
 - holding $x$ constant  
+
+It's all just subtraction! __Compare the difference between actual and expected outcomes.__
+
 
 
 Fitting straight lines  
@@ -258,7 +276,7 @@ Example: Austin food critics
 
 Our fitted line (from OLS):  
 
-<img src="fig/fearlesscritic1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="660px" style="display: block; margin: auto;" />
+<img src="fig/fearlesscritic1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="660px" style="display: block; margin: auto;" />
 
 $$
 \mbox{Price} = -6.2 + 7.9 \cdot \mbox{FoodScore} + \mbox{Error}
@@ -290,7 +308,7 @@ Maybe a sensible starting point for thinking about pricing.
 Making a prediction: the geometry
 =====
 
-<img src="fig/fearlesscritic3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="860px" style="display: block; margin: auto;" />
+<img src="fig/fearlesscritic3.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="860px" style="display: block; margin: auto;" />
 
 
 Summarizing a trend
@@ -318,7 +336,7 @@ Recall our key idea: compare actual with predicted.
 Statistical adjustment
 =====
 
-<img src="fig/fearlesscritic2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="860px" style="display: block; margin: auto;" />
+<img src="fig/fearlesscritic2.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="860px" style="display: block; margin: auto;" />
 
 No surprises here: it's Franklin Barbecue!  Actual price is \$15 per person; predicted price is nearly \$70.  
 
@@ -367,7 +385,7 @@ Polynomial models
 
 Data on gas consumption versus temperature for a single-family house in Minnesota:  
 
-<img src="fig/gas_consumption.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="860px" style="display: block; margin: auto;" />
+<img src="fig/gas_consumption.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="860px" style="display: block; margin: auto;" />
 
 The linear model doesn't fit so well!  
 
@@ -377,7 +395,7 @@ Polynomial models
 
 But a quadratic model does!  
 
-<img src="fig/gas_quadratic_fit.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="600px" style="display: block; margin: auto;" />
+<img src="fig/gas_quadratic_fit.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="600px" style="display: block; margin: auto;" />
 
 $$
 \mbox{Gas Bill} = \$289 - 6.4 \cdot \mbox{Temp} + 0.03 \cdot \mbox{Temp}^2 + \mbox{Residual} \, .
@@ -401,7 +419,7 @@ Polynomial models
 
 There is a temptation to get a better fit by choosing a larger $K$.  This can get ridiculous:  
 
-<img src="fig/gas_fitoverfit.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="900px" style="display: block; margin: auto;" />
+<img src="fig/gas_fitoverfit.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="900px" style="display: block; margin: auto;" />
 
 
 Polynomial models: over-fitting
@@ -420,7 +438,7 @@ Polynomial models: over-fitting
 ========
 
 
-<img src="fig/gas_extrapolate_poly.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="800px" style="display: block; margin: auto;" />
+<img src="fig/gas_extrapolate_poly.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="800px" style="display: block; margin: auto;" />
 
 In later courses, you'll learn formal diagnostics for over-fitting.  In the meantime: you'll pretty much know it when you see it. 
 
@@ -447,21 +465,21 @@ Here's some data on finishing times from runners in the 10-mile Cherry Blossom R
 
 ```
   state time  net age sex
-1    MD 3856 3849  35   M
-2    VA 6438 5986  26   F
-3    PA 6399 6083  39   M
-4    VA 6075 5854  40   M
-5    VA 4887 4461  42   M
-6    VA 6218 5885  33   M
-7    MD 4672 4672  42   M
-8    VA 5672 5300  35   M
+1    MD 5100 5032  58   M
+2    PA 4675 4400  26   M
+3    DC 6564 6564  25   M
+4    NJ 5134 5031  35   M
+5    NY 5669 5187  37   F
+6    MD 4478 4461  23   F
+7    VA 7611 7259  34   M
+8    VA 6075 5699  25   M
 ```
 
 
 Polynomial models: splines
 ========
 
-<img src="06_fitting_equations-figure/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" />
+<img src="06_fitting_equations-figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" style="display: block; margin: auto;" />
 
 Three knots create four disjoint intervals (knots at the 25th, 50th, and 75th percentiles of temperature).  
 
@@ -470,10 +488,22 @@ Three knots create four disjoint intervals (knots at the 25th, 50th, and 75th pe
 Polynomial models: splines
 ========
 
-<img src="06_fitting_equations-figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" style="display: block; margin: auto;" />
+<img src="06_fitting_equations-figure/unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" style="display: block; margin: auto;" />
 
 Separate polynomials on each interval, glued together in a smooth fashion.  __What might explain the non-monotone behavior?__  (Code in `race_splines.R`.)  
 
+
+
+Polynomial models: splines
+========
+
+There are probably at least two things going on here:  
+- actual non-monotonicity: runners reach their physical peak fairly late compared to other athletes (sometime in their 30s or 40s).  
+- survivorship bias: only the more serious runners are still running in their late 30s and through their 40s.  
+
+Bottom line: the flexible piece-wise polynomial (spline) model allowed us to __practice good data science__.  We could:  
+- see these subtle effects in the data.  
+- form theories about what might be causing them.  
 
 
 Exponential growth and decay  

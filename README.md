@@ -4,9 +4,10 @@
 ## What is this course about?
 
 This class is about gaining knowledge from data and about understanding random phenomena.  We'll cover a mix of practice and principles:  
-- You'll learn the mathematical foundations of probability, the language for expressing judgments about uncertain outcomes.  
-- You'll gain a solid understanding of some essential statistical ideas: estimation, hypothesis testing, regression, and a few others.  
-- You'll learn some concrete data-crunching skills, using the [R language](https://www.rstudio.com/).    
+- In part 1, you'll learn the mathematical foundations of probability, the language for expressing judgments about uncertain outcomes. 
+- In part 2, you'll learn some concrete data-crunching skills, using the [R language](https://www.rstudio.com/).  This is roughly weeks 3-4.  
+- In part 3, you'll gain a solid technical understanding of some essential statistical ideas: estimation, hypothesis testing, and a few others.  
+
 
 There's also an important intermediate-term goal: prep you for Econometrics this upcoming academic year.  
 

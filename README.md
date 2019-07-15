@@ -26,8 +26,8 @@ In this first part of the course, we'll learn the mathematical foundations of pr
 
 Slides: [Introduction to Probability](http://rpubs.com/jgscott/intro_probability)  
 
-R scripts:  
-- [predimed_intro.R](R/predimed_intro.R)  
+R scripts and data sets:  
+- [predimed_intro.R](R/predimed_intro.R) and [predimed.csv](data/predimed.csv)   
 
 Two short pieces that illustrate the "fallacy of mistaken compounding":  
 - [How likely is it that birth control could let you down?](https://www.nytimes.com/interactive/2014/09/14/sunday-review/unplanned-pregnancies.html) from the _New York Times_  
@@ -49,7 +49,7 @@ R scripts:
 Slides: [General random variables](http://rpubs.com/jgscott/general_random_variables)   
 
 R scripts:  
-- [textmax_example.R](./r/textmax_example.R)  
+- [textmax_example.R](./R/textmax_example.R)  
 - [normal_example.R](./R/normal_example.R)  
 - [wellbore.R](./R/wellbore.R)    
 
@@ -93,7 +93,7 @@ Inspiration:
 Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)  
   
 R scripts and data:    
-- [afc.R](./r/afc.R) and [afc.csv](data/afc.csv)
+- [afc.R](./R/afc.R) and [afc.csv](data/afc.csv)
 - [creatinine.csv](data/creatinine.csv)  
 
 

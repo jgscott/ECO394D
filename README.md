@@ -1,27 +1,19 @@
 # ECO 394D: Probability and Statistics
 
+Quick links:
+- [Course syllabus](./ref/ECOS394D_Summer2019_Syllabus.pdf)  
+- [Materials and software](materials.md)    
+- [Exercises](./exercises/)  
+
 
 ## What is this course about?
 
 This class is about gaining knowledge from data and about understanding random phenomena.  We'll cover a mix of practice and principles:  
 - In part 1, you'll learn the mathematical foundations of probability, the language for expressing judgments about uncertain outcomes. 
-- In part 2, you'll learn some concrete data-crunching skills, using the [R language](https://www.rstudio.com/).  This is roughly weeks 3-4.  
+- In part 2, you'll learn some concrete data-crunching skills, using the [R language](https://www.rstudio.com/).  
 - In part 3, you'll gain a solid technical understanding of some essential statistical ideas: estimation, hypothesis testing, and a few others.  
 
-
 There's also an important intermediate-term goal: prep you for Econometrics this upcoming academic year.  
-
-
-## Exercises
-
-I will post [all exercises here](exercises/).  
-
-
-## Software
-
-Please install [R](http://www.r-project.org) and then [RStudio](http://www.rstudio.org) on your own computer.  Detailed instructions for installing these two programs [can be found here](https://github.com/jgscott/learnR/blob/master/basics/installing_R.md).  Both are free.
-
-R is the underlying data-analysis program we'll use in this course, while RStudio provides a nice front-end interface to R that makes certain repetitive steps (e.g. loading data, saving plots) very simple.   We will use RStudio a little bit in the beginning of the course, and a lot more towards the middle and end.  RStudio depends upon having R available behind the scenes, so make sure you install both, even though you won't need to interact directly with R.  
 
 
 # Topics outline

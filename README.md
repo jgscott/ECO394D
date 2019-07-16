@@ -93,7 +93,7 @@ Inspiration:
 Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)  
   
 R scripts and data:    
-- [afc.R](./R/afc.R) and [afc.csv](data/afc.csv)
+- [afc_intro.R](./R/afc_intro.R) and [afc.csv](data/afc.csv)
 - [creatinine.csv](data/creatinine.csv)  
 
 
@@ -101,6 +101,14 @@ R scripts and data:
 ## Part 3: Statistical inference
 
 ### Sampling distributions and the bootstrap
+
+Slides: [Introduction to the bootstrap](http://rpubs.com/jgscott/bootstrap)  
+  
+
+R scripts and data:    
+- [creatinine_bootstrap.R](./R/creatinine_bootstrap.R) and [creatinine.csv](data/creatinine.csv)   
+
+creatinine_bootstrap.R
 
 ### Basics of hypothesis testing  
 

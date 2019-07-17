@@ -391,12 +391,24 @@ Facts about the normal
 - If $Z \sim N(0,1)$ and $X = \sigma Z + \mu$, then $X \sim N(\mu, \sigma^2)$.  
 - We use the Greek letter $\Phi$ to denote the CDF of a standard normal: if $Z \sim N(0,1)$, then $\Phi(z) = F_Z(z) = P(Z \leq z)$.  There is no closed-form mathematical expression for $\Phi$.  
 
+
 Facts about the normal
 ======
 
 Here's a picture of $\Phi(x)$:
 
 <img src="03_general_random_variables-figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
+
+
+Facts about the normal
+======
+
+<img src="03_general_random_variables-figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+
+A couple of useful _critical values_: if $Z$ is standard normal, then 
+- $P(|Z| \leq 1) \approx 0.68$  
+- $P(|Z| \leq 2) \approx 0.95$ (More accurately, $P(|Z| \leq 1.96) = 0.9500042)$
+
 
 
 Facts about the normal
@@ -425,7 +437,7 @@ The normal is used _everywhere_:
 - returns on an asset in a financial portfolio  
 - properties of populations (heights, weights, 100m dash times, etc)  
 
-Sometimes sensibly, sometimes inappropriately!  
+Sometimes sensibly, sometimes inappropriately!   
 
 
 Facts about the normal

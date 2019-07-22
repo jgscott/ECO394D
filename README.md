@@ -50,7 +50,7 @@ Slides: [General random variables](http://rpubs.com/jgscott/general_random_varia
 
 R scripts:  
 - [textmax_example.R](./R/textmax_example.R)  
-- [normal_example.R](./R/normal_example.R)  
+- [normal_example.R](./R/normal_example.R)   
 - [wellbore.R](./R/wellbore.R)    
 
 
@@ -102,7 +102,7 @@ R scripts and data:
 
 ### Sampling distributions and the bootstrap
 
-Slides: [Introduction to the bootstrap](http://rpubs.com/jgscott/bootstrap)  
+Slides: [Introduction to the bootstrap](http://rpubs.com/jgscott/bootstrap_intro)  
   
 
 R scripts and data:    

@@ -1,9 +1,11 @@
 The bootstrap
 ========================================================
-author: An introduction to resampling methods
-autosize: false
+author: An introduction to resampling methods  
+date: 
+autosize: true
 font-family: 'Gill Sans'
-transition: none
+transition: none  
+
 
 
 <style>
@@ -15,7 +17,6 @@ transition: none
 
 
 Reference: _Data Science_ Chapter 5
-
 
 
 Quantifying uncertainty
@@ -31,6 +32,8 @@ Quantifying uncertainty
 
 Conclusion: 
 - Chemotherapy patients are __13%__ more likely to survive past 5 years.    
+
+
 
 
 Quantifying uncertainty
@@ -238,10 +241,12 @@ An analogy
 
 <img src="fig/sink.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="400px" style="display: block; margin: auto;" />
 
+
+
 The farmhouse idyll...
 ========
 
-<img src="fig/shaws.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="900px" style="display: block; margin: auto;" />
+<img src="fig/shaws.jpg" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="900px" style="display: block; margin: auto;" />
 
 
 And the fine print
@@ -545,14 +550,4 @@ The essential idea of the bootstrap is to simulate synthetic data sets by resamp
 A common variation is called the _parametric bootstrap_: simulate synthetic data sets by simulating from a fitted parametric model.  
 
 See `predimed_bootstrap.R`!  
-
-<!-- The parametric bootstrap -->
-<!-- =============   -->
-
-<!-- Example: see `predimed_bootstrap.R` -->
-
-<!-- In class:   -->
-<!-- - Look at the data in `brca.csv`   -->
-<!-- - Consider the conditional probability P(cancer | risk factors) _before_ screening (i.e. not using the `recall` variable).  Fit this using a logit model on the full data set.   -->
-<!-- - Then address the question: are there some patients for whom  P(cancer | risk factors) is much more uncertain than others?   -->
 

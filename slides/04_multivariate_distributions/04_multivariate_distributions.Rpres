@@ -1113,3 +1113,10 @@ And the data bears out the math:
 knitr::include_graphics("fig/pearson_heights_conditional.png") 
 ```
 
+
+Stocks and bonds
+=======
+
+Your turn!  
+- Together, we'll take a look at `bivariate_normal.R` on the class website.  
+- Use that as a starting point for our [case study on stocks and bonds.](https://github.com/jgscott/learnR/blob/master/cases/bvnorm/bvnorm.md)  (No need to continue through to the "Optional topic" section, although feel free!)  

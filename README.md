@@ -49,8 +49,8 @@ R scripts:
 Slides: [General random variables](http://rpubs.com/jgscott/general_random_variables)   
 
 R scripts:  
-- [textmax_example.R](./R/textmax_example.R)  
-- [normal_example.R](./R/normal_example.R)   
+- [testmax_example.R](./R/testmax_example.R)  
+- [normal_example.R](./R/normal_example.R) and [annual_returns_since1928.csv](./data/annual_returns_since1928.csv)  
 - [wellbore.R](./R/wellbore.R)    
 
 
@@ -58,7 +58,9 @@ R scripts:
 
 Slides: [Multivariate distributions](http://rpubs.com/jgscott/multivariate_distributions)   
 
-
+R scripts:  
+- [bivariate_normal.R](./R/bivariate_normal.R)  
+- [Case study on stocks and bonds](https://github.com/jgscott/learnR/blob/master/cases/bvnorm/bvnorm.md)  
 
 ## Part 2: Data analysis
 

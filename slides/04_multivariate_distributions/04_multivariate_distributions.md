@@ -1066,3 +1066,10 @@ And the data bears out the math:
 
 <img src="fig/pearson_heights_conditional.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="850px" style="display: block; margin: auto;" />
 
+
+Stocks and bonds
+=======
+
+Your turn!  
+- Together, we'll take a look at `bivariate_normal.R` on the class website.  
+- Use that as a starting point for our [case study on stocks and bonds.](https://github.com/jgscott/learnR/blob/master/cases/bvnorm/bvnorm.md)  (No need to continue through to the "Optional topic" section, although feel free!)  

@@ -5,6 +5,10 @@ Quick links:
 - [Materials and software](materials.md)    
 - [Exercises](./exercises/)  
 
+The team:  
+- [James Scott](https://jgscott.github.io/), instructor.  Office hours MW 3:20 to 4:20, GDC 7.516.  
+- [Molin Li](https://liberalarts.utexas.edu/economics/phd/profile.php?id=ml46274), teaching assistant.  Office hours Friday at 2PM, immediately after TA session.  
+
 
 ## What is this course about?
 
@@ -71,7 +75,7 @@ In this middle part of the course, we spend a lot more time hands-on with data s
 
 Topics: data visualization and practice with R.  Bar plots; basic plots for numerical data (scatterplots, boxplots, histograms, line graphs); panel plots.  Introduction to ggplot2.  
 
-Examples of [bad graphics](ref/badgraphics.pdf).  
+Examples of [bad graphics](ref/badgraphics.pdf).  And [an example from the New York Times](https://www.nytimes.com/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html).  
 
 Slides: [Introduction to Data Exploration](http://rpubs.com/jgscott/data_exploration)  
 

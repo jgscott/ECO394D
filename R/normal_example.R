@@ -67,7 +67,7 @@ plot(1:Horizon, colMeans(sim1), type='l', col='red',
 	las=1, cex.axis = 0.85,
 	ylim=c(10000, 2*max(colMeans(sim1))))
 	
-for(sim in 1:nrow(sim1)) {
+for(sim in 1:50) {
   lines(1:Horizon, sim1[sim,], type='l', col=rgb(0.5,0.5,0.5,0.25))
 }
 lines(1:Horizon, colMeans(sim1), lwd=3, col='red')

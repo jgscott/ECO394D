@@ -23,7 +23,7 @@ Types of features in a data set
 ================
 
 Categorical: the answer to a multiple choice question:
-- Chevy/Honday/Tesla
+- Chevy/Honda/Tesla
 - ice cream/cake/pie
 
 Ordinal: categorical, where the answers have an ordering but not a magnitude
@@ -285,7 +285,7 @@ Grouping and summarizing
 ========
 class: small-code
 
-Another good use of tables is to display _summary statistics_ of numerical variables.  For example, here's how we'd use pipes to compute the average age by passsenger class:
+Another good use of tables is to display _summary statistics_ of numerical variables.  For example, here's how we'd use pipes to compute the average age by passenger class:
 
 
 ```r

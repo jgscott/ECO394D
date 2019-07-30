@@ -11,7 +11,7 @@ mu1 = 0.065
 mu2 = 0.015
 sigma1 = 0.2
 sigma2 = 0.1
-rho = -0.2
+rho = -0.9
 
 # 1000 samples from this bivariate normal
 returns = rbvnorm(1000, mu1, mu2, sigma1, sigma2, rho)

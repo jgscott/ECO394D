@@ -1,6 +1,6 @@
-The bootstrap
+Standard errors and the bootstrap
 ========================================================
-author: An introduction to resampling methods  
+author: 
 date: 
 autosize: true
 font-family: 'Gill Sans'
@@ -17,6 +17,22 @@ transition: none
 
 
 Reference: _Data Science_ Chapter 5
+
+
+Outline
+========
+
+- Uncertainty quantification as a "what if?"  
+- Sampling distributions  
+- Bias and standard error  
+- The bootstrap  
+
+***
+
+- Bootstrapped confidence intervals  
+- Bootstrapped versus plug-in standard errors  
+- Bonus topic: the parametric bootstrap  
+
 
 
 Quantifying uncertainty
@@ -390,7 +406,6 @@ We'll bootstrap two estimators:
 
 
 
-
 Confidence intervals
 ========
 
@@ -516,15 +531,114 @@ Bootstrapped confidence intervals
 
 - 100 different samples
 - 100 different 80% confidence intervals 
-- 83 of them cover the truth  
+- 83 of them cover the truth---pretty good!  
+
+
+
+Plug-in standard errors  
+========
+
+Sometimes we can use probability theory to calculate a "plug-in" estimate of an estimator's standard error.  Some simple cases include:  
+- means and differences of means  
+- proportions and differences of proportions  
+
+Let's see an example and compare the result with a bootstrap estimate of the standard error.  
+
+
+Plug-in standard errors
+========
+
+Suppose that $X_1, X_2, \ldots, X_N$ are a sample of independent, identically distributed (IID) random variables with unknown mean $\mu$ and variance $\sigma^2$.  Let $\bar{X}_N$ be the sample mean:
+
+$$
+\bar{X}_N = \frac{1}{N} \sum_{i=1}^N X_i
+$$
+
+
+Clearly $\bar{X}_N$ is a sensible estimate of $\mu$, since it is unbiased: $E(\bar{X}_N) = \mu$ (show this!)  
+
+
+
+Plug-in standard errors
+========
+
+We can also calculate the theoretical variance of $\bar{X}_N$ as:  
+
+$$
+\begin{aligned}
+\mbox{var}(\bar{X}_N) = \mbox{var} \left( \frac{1}{N} \sum_{i=1}^N X_i \right) 
+& = \frac{1}{N^2} \mbox{var} \left( \sum_{i=1}^N X_i \right) \\ 
+&= \frac{1}{N^2} N \sigma^2 \\ 
+&= \frac{\sigma^2}{N} 
+\end{aligned}  
+$$
+
+
+Plug-in standard errors
+========
+
+This tells us that the _true standard error_ of the sample mean is:  
+
+$$
+\mbox{se}(\bar{X}_N) = \frac{\sigma}{\sqrt{N}}
+$$
+
+Or in words:
+
+$$
+\small
+\mbox{Average error of the sample mean} = \frac {\mbox{Average error of a single measurement}} { \mbox{Square root of sample size} }
+$$
+
+This is sometimes called de Moivre's equation, after Abraham de Moivre.  
+
+
+Plug-in standard errors
+========
+
+There's only one problem with de Moivre's equation: we don't know the true $\sigma$!
+
+$$
+\mbox{se}(\bar{X}_N) = \frac{\sigma}{\sqrt{N}}
+$$
+
+The obvious solution is to estimate $\sigma$ from the data.  This results in the so-called "plug-in" estimate of the standard error:  
+
+$$
+\hat{se}(\bar{X}_N) = \frac{\hat{\sigma}}{\sqrt{N}}
+$$
+
+where $\hat{\sigma}$ is an estimate of the population standard deviation (e.g. the sample standard deviation).  
+
+
+Plug-in standard errors
+========
+
+Suppose we have an estimator $\hat{\theta}_N$ and we want to know its standard error.  The general plug-in procedure involves three steps:  
+  1. Use probability theory to derive an expression for the _true standard error_ $\mbox{se}(\hat{\theta}_N)$.  
+  2. Use the data to estimate any unknown population parameters $\phi$ that appear in the expression for $\mbox{se}(\hat{\theta}_N)$.  (Note: this might even include $\theta$, the parameter of interest itself.)
+  3. Plug in the estimate $\hat{\phi}$ into this expression to yield the plug-in standard error, $\hat{se}(\hat{\theta}_N)$
+
+Let's see an example in `predimed_plugin.R`.  
+
+
+Plug-in standard errors
+========
+type: prompt  
+
+Your turn!  For the same `predimed` data set:  
+- Let $p_1$ be the true population proportion of people we expect to experience a cardiac event in the control group, and let $p_2$ be the same proportion in "Mediterranean diet + VOO" group.  
+- Suppose we're interested in $p_1 - p_2$, the difference in (unknown) true proportions.  We estimate this using $\hat{p}_1 - \hat{p}_2$, the difference in _sample_ proportions from our data.  
+- Use the plug-in procedure to derive an estimated standard error, $\hat{se}(\hat{p}_1 - \hat{p}_2)$, and calculate this for the `predimed` data.  
+- Compare this to a bootstrapped standard error.   
 
 
 Summary
 ========
 
 - Any estimator $\hat{\theta}_N$ is a random variable.  
-- It's probability distribution is called the _sampling distribution._  
-- The sampling distribution describes the results of a thought experiment: what would happen if we took lots and lots of samples, each of size $N$, and tracked how much our estimate changed?  
+- Its probability distribution is called the _sampling distribution._  
+- The sampling distribution describes the results of a thought experiment: _what if_ we took lots and lots of samples, each of size $N$, and tracked how much our estimate changed?  
 
 
 Summary
@@ -533,6 +647,8 @@ Summary
 - The _standard error_ is the standard deviation of the sampling distribution.  
 - Roughly speaking, it answers the question: how far off do I expect my estimate to be from the truth?  
 - A practical way of estimating the standard error is by _bootstrapping_: repeatedly re-sampling with replacement from the original sample, and re-calculating the estimate each time.  
+- In simple cases we can also calculate a _plug-in_ estimate of the standard error, using probability theory together with sample estimates of unknown parameters.  __You will do this all the time in Econometrics!__
+
 
 Summary
 ========
@@ -540,6 +656,7 @@ Summary
 - From the bootstrapped sampling distribution, we can get an interval estimate for the parameter of interest (using the standard-error method or the quantile method).  
 - Both methods approximately satisfy the frequentist coverage principle: under repeated sampling, they contain the true value roughly the correct percentage of the time.  
 - I tend to use the quantile method because it's pretty intuitive!  
+
 
 
 Bonus: parametric bootstrap 

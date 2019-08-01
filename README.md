@@ -83,6 +83,7 @@ R scripts and data:
 - [mpg.R](R/mpg.R)  
 - [titanic.R](R/titanic.R) and [TitanicSurvival.csv](data/TitanicSurvival.csv)  
 - [toyimports_linegraph.R](R/toyimports_linegraph.R) and [toyimports.csv](data/toyimports.csv)  
+- [Green buildings case study](exercises/green_buildings.md)  
 
 
 Inspiration:  
@@ -101,7 +102,6 @@ Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)
 R scripts and data:    
 - [afc_intro.R](./R/afc_intro.R) and [afc.csv](data/afc.csv)
 - [creatinine.csv](data/creatinine.csv)  
-- [Green buildings case study](exercises/green_buildings.md)  
 
 
 ## Part 3: Statistical inference

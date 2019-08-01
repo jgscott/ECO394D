@@ -52,6 +52,4 @@ The developer has had someone on her staff, who's been described to her as a "to
 
 The developer listened to this recommendation, understood the analysis, and still felt unconvinced.  She has therefore asked you to revisit the report, so that she can get a second opinion.
 
-Do you agree with the conclusions of her on-staff stats guru?  If so, point to evidence supporting his case.  If not, explain specifically where and why the analysis goes wrong, and how it can be improved.  (For example, do you see the possibility of confounding variables for the relationship between rent and green status?)  _Tell your story mainly in pictures, with appropriate introductory and supporting text._  
-
-Note: this is intended mainly as an exercise in visual and numerical story-telling. While you can run a regression model if you want, that's not the end goal here.  Telling a story is.  Keep it concise.   
+Do you agree with the conclusions of her on-staff stats guru?  If so, point to evidence supporting his case.  If not, explain specifically where and why the analysis goes wrong, and how it can be improved.  (For example, do you see the possibility of confounders/alternative explanations for the relationship between rent and green status?)  _Tell your story mainly in pictures, with appropriate introductory and supporting text._  

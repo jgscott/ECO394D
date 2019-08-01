@@ -101,7 +101,7 @@ Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)
 R scripts and data:    
 - [afc_intro.R](./R/afc_intro.R) and [afc.csv](data/afc.csv)
 - [creatinine.csv](data/creatinine.csv)  
-
+- [Green buildings case study](exercises/green_buildings.md)  
 
 
 ## Part 3: Statistical inference

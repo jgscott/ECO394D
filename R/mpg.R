@@ -101,7 +101,7 @@ ggplot(mpg, aes(displ, hwy)) +
   )
 
 
-# axis labels
+# axis label
 ggplot(mpg, aes(displ, hwy)) +
   geom_point(aes(colour = class)) +
   geom_smooth(se = FALSE) +
@@ -110,6 +110,17 @@ ggplot(mpg, aes(displ, hwy)) +
     y = "Highway fuel economy (mpg)",
     colour = "Car type"
   )
+
+# axis labels
+ggplot(subset(mpg, displ < 6.7), aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_smooth(se = FALSE) +
+  labs(
+    x = "Engine displacement (L)",
+    y = "Highway fuel economy (mpg)",
+    colour = "Car type"
+  )
+
 
 
 

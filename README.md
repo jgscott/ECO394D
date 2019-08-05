@@ -6,7 +6,7 @@ Quick links:
 - [Exercises](./exercises/)  
 
 The team:  
-- [James Scott](https://jgscott.github.io/), instructor.  Office hours MW 3:20 to 4:20, GDC 7.516.  
+- [James Scott](https://jgscott.github.io/), instructor.  Office hours MW 3:20 to 4:20, CBA 6.478.  
 - [Molin Li](https://liberalarts.utexas.edu/economics/phd/profile.php?id=ml46274), teaching assistant.  Office hours Friday at 2PM, immediately after TA session.  
 
 
@@ -121,7 +121,8 @@ Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)
 R scripts and data:    
 - [afc_intro.R](./R/afc_intro.R) and [afc.csv](data/afc.csv)
 - [creatinine.csv](data/creatinine.csv)  
-
+- [race_splines.R](./R/race_splines.R)  
+- [ebola.R](./R/ebola.R)  
 
 ## Part 3: Statistical inference
 

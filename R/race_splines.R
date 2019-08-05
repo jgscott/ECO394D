@@ -1,6 +1,6 @@
 library(splines)
 library(mosaic)
-librar(tidyverse)
+library(tidyverse)
 data(TenMileRace)
 
 head(TenMileRace)

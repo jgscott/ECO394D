@@ -94,6 +94,24 @@ Inspiration:
 - [LeBron James's playoff scoring record](https://www.nytimes.com/interactive/2017/05/25/sports/basketball/lebron-career-playoff-points-record.html)   
 
 
+### Midterm
+
+
+Midterm statistics: curved grades
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  65.00   83.50   86.80   86.25   92.30   98.90 
+```
+
+Midterm statistics: raw grades
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   35.0    70.0    76.0    74.9    86.0    98.0 
+```
+
+
 
 ### Fitting equations to data
 

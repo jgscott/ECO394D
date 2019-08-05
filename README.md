@@ -66,6 +66,25 @@ R scripts:
 - [bivariate_normal.R](./R/bivariate_normal.R)  
 - [Case study on stocks and bonds](https://github.com/jgscott/learnR/blob/master/cases/bvnorm/bvnorm.md)  
 
+
+### Midterm
+
+
+Midterm statistics: curved grades
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  65.00   83.50   86.80   86.25   92.30   98.90 
+```
+
+Midterm statistics: raw grades
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   35.0    70.0    76.0    74.9    86.0    98.0 
+```
+
+
 ## Part 2: Data analysis
 
 In this middle part of the course, we spend a lot more time hands-on with data sets and with R.  
@@ -92,24 +111,6 @@ Inspiration:
 - [Low-income students in college](https://www.nytimes.com/interactive/2017/01/18/upshot/some-colleges-have-more-students-from-the-top-1-percent-than-the-bottom-60.html)  
 - [The French presidential election](https://www.nytimes.com/interactive/2017/04/23/world/europe/french-election-results-maps.html)  
 - [LeBron James's playoff scoring record](https://www.nytimes.com/interactive/2017/05/25/sports/basketball/lebron-career-playoff-points-record.html)   
-
-
-### Midterm
-
-
-Midterm statistics: curved grades
-
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  65.00   83.50   86.80   86.25   92.30   98.90 
-```
-
-Midterm statistics: raw grades
-
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   35.0    70.0    76.0    74.9    86.0    98.0 
-```
 
 
 

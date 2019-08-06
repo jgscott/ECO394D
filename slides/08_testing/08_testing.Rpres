@@ -1,0 +1,157 @@
+Hypothesis testing  
+===================
+date: James Scott (UT-Austin)
+autosize: true
+font-family: 'Gill Sans'
+transition: none
+
+
+<style>
+.small-code pre code {
+  font-size: 1em;
+}
+</style>
+
+```{r setup, echo=FALSE, display=FALSE}
+opts_chunk$set(cache=TRUE)
+```
+
+
+Reference: "Data Science" Chapter 7  
+
+
+Outline
+=====
+
+- An introductory example  
+- The four steps of every hypothesis test  
+- $p$-values  
+- permutation tests  
+
+
+The Patriots
+=======
+
+Unless you're from a narrow strip of land from Connecticut to Maine, you probably dislike the New England Patriots.  
+
+```{r, out.width = "400px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/patriots_logo.png") 
+```
+
+
+The Patriots
+=======
+
+First of all, they win too much.  
+
+```{r, out.width = "750px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/patriots_superbowl.jpg") 
+```
+
+
+
+
+The Patriots
+=======
+
+Then there's Tom Brady, their star quarterback... 
+
+```{r, out.width = "300px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/tb12.jpeg") 
+
+```
+
+
+"The more hydrated I am, the less likely I am to get sunburned."  --TB12  
+
+
+The Patriots
+=======
+
+And Bill Belichick, their coach...
+
+```{r, out.width = "800px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/EmperorBelichick.jpg") 
+```
+
+
+The Patriots
+=======
+
+And of course, the cheating!  
+
+```{r, out.width = "500px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/gameball.jpg") 
+```
+
+
+The Patriots
+=======
+
+But could even the Patriots cheat at the _pre-game coin toss?_  
+
+
+
+The Patriots
+=======
+
+Many people think so!  
+
+```{r, out.width = "650px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/coin_toss.png") 
+```
+
+
+The Patriots
+=======
+incremental: true
+
+For a 25-game stretch during the 2014 and 2015 NFL seasons, the Patriots won the pre-game coin toss 19 out of 25 times, for a suspiciously high winning percentage of 76%.  
+
+Shannon Sharpe: "This proves that either God or the devil is a Patriots fan, and it can't possibly be God."  
+
+
+The Patriots
+=======
+
+"Use the Force..."
+
+```{r, out.width = "800px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/EmperorBelichick.jpg") 
+```
+
+
+
+The Patriots
+=======
+
+But before we invoke religion or the Force to explain this fact, let's consider the innocent explanation first: blind luck.  
+- If you toss a coin over and over again, you'll see some long streaks with more heads, and some with more tails, just by luck.  
+- Is it plausible that the Patriots just went on a lucky 25-game streak?  
+
+
+The Patriots
+=======
+
+To the code in `patriots.R`!  Let's simulate some coin flips.  
+
+
+Summary
+=======
+
+This simple example has all the major elements of _hypothesis testing_:  
+  1. We have a _null hypothesis_, that the pre-game coin toss in the Patriots' games was truly random.  
+  2. We use a _test statistic_, number of Patriots' coin-toss wins, to measure the evidence against the null hypothesis.  
+  3. We calculated the probability distribution of the test statistic, assuming that the null hypothesis is true.  Here, we just ran a Monte Carlo simulation of coin flips, assuming an unbiased coin.  
+  4. Finally, we used this probability distribution to assess whether the null hypothesis looked believable in light of the data.  
+
+
+Summary
+=======
+
+All hypothesis testing problems have these same four elements.  
+
+  1. A null hypothesis $H_0$.  
+  2. A test statistic $T \in \mathcal{T}$ that summarizes the data and measures the evidence against the null hypothesis.  (More extreme values of $T$ mean stronger evidence.)  
+  3. $P(T \mid H_0)$:  the sampling distribution of the test statistic, assuming the null hypothesis is true.  
+  4. A rejection region $R \subset \mathcal{T}$.  

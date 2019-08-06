@@ -121,6 +121,7 @@ Slides: [Fitting equations](http://rpubs.com/jgscott/fitting_equations)
 R scripts and data:    
 - [afc_intro.R](./R/afc_intro.R) and [afc.csv](data/afc.csv)
 - [creatinine.csv](data/creatinine.csv)  
+- [utilities.R](./R/utilities.R)  
 - [race_splines.R](./R/race_splines.R)  
 - [ebola.R](./R/ebola.R)  
 
@@ -138,7 +139,15 @@ R scripts and data:
 
 ### Basics of hypothesis testing  
 
+Slides: [Introduction to hypothesis testing](http://rpubs.com/jgscott/testing)    
+  
+R scripts and data:    
+- [patriots.R](./R/patriots.R)  
+
 
 ### Introduction to asymptotic theory 
 
 
+R scripts and data:    
+- [clt.R](./R/clt.R)  
+  

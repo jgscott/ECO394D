@@ -22,7 +22,7 @@ lm2 = lm(daily.average.gasbill ~ poly(temp, 2), data=utilities)
 plotModel(lm2)
 
 # extrapolation isn't wild
-plotModel(lm2 )+ xlim(-10, 100)
+plotModel(lm2) + xlim(-10, 100)
 
 # Now go crazy! 15th-degree polynomial
 lm15 = lm(daily.average.gasbill ~ poly(temp, 15), data=utilities)

@@ -14,7 +14,7 @@ lm1 = lm(Price ~ FoodScore, data = afc)
 coef(lm1)
 
 # make prediction on new data
-new_data = data.frame(FoodScore = 7.5)
+new_data = data.frame(FoodScore = c(6.5, 7.5, 9.0))
 predict(lm1, new_data)
 
 

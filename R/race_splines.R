@@ -16,8 +16,8 @@ ggplot(TenMileRace) +
 my_knots = quantile(TenMileRace$age, prob=c(0.25,0.5,0.75))
 
 # # Or K intervals
-# K=7
-# my_knots = quantile(TenMileRace$age, prob=seq(1/K, 1-1/K, by=1/K))
+K=7
+my_knots = quantile(TenMileRace$age, prob=seq(1/K, 1-1/K, by=1/K))
 
 
 

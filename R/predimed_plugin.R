@@ -29,9 +29,6 @@ boot1 = do(1000)*{
 
 head(boot1)
 
-# Inspect the sampling distribution
-hist(boot1$Control)
-
 # Bootstrapped estimate of standard error
 sd(boot1$Control)
 

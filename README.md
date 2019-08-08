@@ -135,6 +135,7 @@ Slides: [Introduction to the bootstrap](http://rpubs.com/jgscott/bootstrap_intro
 R scripts and data:    
 - [creatinine_bootstrap.R](./R/creatinine_bootstrap.R) and [creatinine.csv](data/creatinine.csv)   
 - [predimed_bootstrap.R](./R/predimed_bootstrap.R)  
+- [predimed_plugin.R](./R/predimed_plugin.R)  
 
 
 ### Basics of hypothesis testing  

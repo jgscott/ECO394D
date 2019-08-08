@@ -40,7 +40,7 @@ The Patriots
 
 First of all, they win too much.  
 
-<img src="fig/patriots_superbowl.jpg" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="750px" style="display: block; margin: auto;" />
+<img src="fig/patriots_superbowl.jpg" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="650px" style="display: block; margin: auto;" />
 
 
 
@@ -130,10 +130,6 @@ This simple example has all the major elements of _hypothesis testing_:
   4. Finally, we used this probability distribution to assess whether the null hypothesis looked believable in light of the data.  
 
 
-Summary
-=======
-
-<img src="fig/patriots_coinflip.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="750px" style="display: block; margin: auto;" />
 
 
 Summary
@@ -144,40 +140,252 @@ All hypothesis testing problems have these same four elements.
   1. A null hypothesis $H_0$.  
   2. A test statistic $T \in \mathcal{T}$ that summarizes the data and measures the evidence against the null hypothesis.  (More extreme values of $T$ mean stronger evidence.)  
   3. $P(T \mid H_0)$:  the sampling distribution of the test statistic, assuming that the null hypothesis is true.  _This provides context for our measurement in step 2._  
-  4. An assessment: in light of what we see in step 3, does our data look plausible under the null hypothesis?  
+  4. An assessment: in light of what we see in step 3, does our test statistic look plausible under the null hypothesis?  
   
   
   
 Two schools of thought
 =======
 
-There are two different schools of thought about how to assess the plausibility of the null hypothesis.  
-  1. The Neyman-Pearson approach: step 4 is about __making a decision with ex-ante performance guarantees.__  Key terms: rejection region, $\alpha$ level, power curve.    
-  2. The Fisherian approach: step 4 is about __summarizing the evidence after the fact.__  Key terms: _$p$-value._   
-  
-  
+Within this basic framework, there are two schools of thought about how to proceed.  
+  1. The Fisherian approach: step 4 is about __summarizing the evidence after the fact.__  Key terms: _$p$-value._   
+  2. The Neyman-Pearson approach: step 4 is about __making a decision with ex-ante performance guarantees.__  Key terms: rejection region, $\alpha$ level, power curve.    
 
-Neyman-Pearson: short version  
+  
+  
+Fisher's approach
+=======  
+
+Suppose our observed test statistic is $t_{ob}$.  In step 4, we should report the quantity
+
+$$
+p = P(T \geq t_{ob} \mid H_0)
+$$
+
+Fisher call this the $p$-value: the probability that, if the null hypothesis were true, we would observe a test statistic $T$ at least as extreme as the value we actually observed ($t_{ob}$).  
+
+
+
+For the Patriots' example  
 =======
 
-Suppose you've specified $H_0$ (step 1), chosen your test statistic $T \in \mathcal{T}$ (step 2), and calculated $P(T \mid H_0)$ (step 3).  _Before looking at the observed test statistic for your actual data,_ continue as follows:  
+<img src="fig/patriots_coinflip.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="750px" style="display: block; margin: auto;" />
+
+
+
+Fisher's approach
+=======  
+
+The $p$-value summarizes the strength of evidence provided by the data against the null hypothesis.
+- $p$ closer to 0: data less likely under the null, so the null is more likely to be wrong.  __Stronger evidence against $H_0$.__
+- $p$ further from 0: data more likely under the null.  __Weaker evidence against $H_0$.__
+
+According to Fisher: job done!  _Report the $p$-value and let your readers make whatever they will of it._  
+
+
+What do you mean by "close to 0"?  
+=======  
+
+
+What do you mean by "close to 0"?  
+=======  
+
+<img src="fig/fisher.jpg" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="350px" style="display: block; margin: auto;" />
+
+***
+
+"Mwa-ha-ha-ha-ha-ha!"
+
+"You're on your own, suckahs!"  
+
+
+
+p-values in the real world
+=======  
+incremental: true
+
+
+The putative advantage of $p$-values is that they provide a sliding scale of evidence against the null hypothesis.  
+
+The biggest problem with $p$-values is that they are nearly impossible to interpret.  
+
+
+Problem 1: they are hard to interpret.
+=======  
+
+"I got a $p$-value of 0.02, so there's a 2% chance that the null hypothesis is right."
+
+__Wrong__:
+- $p = P(T \geq t_{ob} \mid H_0)$
+- $p \neq P(H_0 \mid t_{ob})$  
+
+Remember: conditional probabilities aren't symmetric!  
+
+
+Problem 1: they are hard to interpret.
+=======  
+
+"I got a $p$-value of 0.02.  There's only a 2% chance I would have observed my test statistic if the null hypothesis were true."  
+
+__Wrong__:
+- $p = P(T \geq t_{ob} \mid H_0)$
+- $p \neq P(T = t_{ob} \mid H_0)$  
+
+Remember: the $p$-value is the probability of observing the test statistic you actually observed, __or any more extreme test statistic__, assuming $H_0$ is true.   
+
+
+
+Problem 2: people oversimplify them  
+=======  
+
+Because $p$-values are hard to interpret, people tend to impose arbitrary cut-offs for what counts as a "significant" p-value.  
+
+Psychologists, for example, will generally publish research findings for which $p < 0.05$.  
+
+
+Problem 2: people oversimplify them  
+=======  
+
+Then again, psychologists will believe anything.
+
+<img src="fig/powerpose.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="850px" style="display: block; margin: auto;" />
+
+
+
+Problem 2: people oversimplify them  
+=======  
+
+Then again, psychologists will believe anything.
+
+<img src="fig/himmicanes.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="550px" style="display: block; margin: auto;" />
+
+
+
+Problem 2: people oversimplify them  
+=======  
+
+Then again, psychologists will believe anything.
+
+
+
+<img src="fig/wear_red.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="750px" style="display: block; margin: auto;" />
+
+
+
+Problem 2: people oversimplify them  
+=======  
+left: 40% 
+
+Physicists are a bit more skeptical; they generally publish results when $p < 0.000001$.  
+
+For example, the $p$-value in the paper announcing the discovery of the Higgs boson was $1.7 \times 10^{-9}$.  
+
+***
+
+<img src="fig/higgs.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="450px" style="display: block; margin: auto;" />
+
+
+
+Neyman's criticisms of p-values  
+=======  
+
+1. Nobody except Fisher knows how to interpret them.   
+
+2. Rejecting a null hypothesis isn't meaningful unless we have some alternative hypothesis in mind.  Since people will inevitably use a $p$-value to make a binary decision ("null" versus "alternative"), we should formalize that decision process.  
+
+
+
+Neyman-Pearson testing   
+=======
+
+The Neyman-Pearson approach is aimed at quantifying (and controlling) the error probabilities associated with a hypothesis test.
+
+False positive: rejecting $H_0$ when it is actually true.  ("Type I error")  
+
+False negative: retaining $H_0$ when it is actually false.  ("Type II error")
+
+
+
+Neyman-Pearson testing   
+=======
+
+In Neyman Pearson testing, we have a modified sequence of steps:  
+  1. Specify $H_0$ __and $H_A$, an alternative hypothesis.__
+  2. Choose your test statistic $T \in \mathcal{T}$.  
+  3. calculate $P(T \mid H_0)$ __and $P(T \mid H_A)$.__  
+
+
+Neyman-Pearson testing   
+=======
+
+_Before looking at the observed test statistic $t_{ob}$ for your actual data,_ continue as follows.
 
   4a. Specify a rejection region $R \subset \mathcal{T}$.    
-  4b. Using the result of step 3, calculate $\alpha = P(T \in R \mid H_0)$.  This is called the alpha level or _size_ of the test.  
-  4c. Check whether your observed test statistic, $t_{ob}$, falls in $R$.  If so, reject $H_0$.  If not, retain $H_0$.  
+  4b. Calculate $\alpha = P(T \in R \mid H_0)$.  This is called the alpha level or _size_ of the test.  
+  4c. Calculate the _power_ of your test as $P(T \in R \mid H_A)$.  
+  4d. Check whether your observed test statistic, $t_{ob}$, falls in $R$.  If so, reject $H_0$ in favor of $H_A$.  If not, retain $H_0$.  
 
-Return to `patriots.R.`  
+
+Neyman-Pearson testing   
+=======
+
+The test is characterized by two properties:
+- $\alpha = P(T \in R \mid H_0)$: the probability of falsely rejecting the null hypothesis when it's true.  
+- $\beta = 1 -$ Power $= 1- P(T \in R \mid H_A)$: the probability of failing to reject the null hypothesis when it's false.  
 
 
-Neyman-Pearson  
+
+Neyman-Pearson testing   
 =======
 
 At the end of a Neyman-Pearson test, you report:  
-- the size ($\alpha$ level) of the rejection region.  
+- the size ($\alpha$ level) of the test.  
+- the _power_ of the test, or equivalently $\beta =  1 -$ power.  
 - the result of the test: reject or retain ("fail to reject") the null hypothesis.  
-- the _power_ of the test.  (We haven't covered this yet but will later.)  
 
-Fisher's criticism
+No $p$-values!  
+
+
+Neyman-Pearson testing   
 =======
 
-The out
+The difficulty of conducting a Neyman-Pearson test depends upon the alternative hypothesis.  
+- "Simple" alternatives are easy: the power is just a single number.  
+- "Composite" alternatives are a bit harder: the power is a function of an unknown parameter.  
+
+
+Simple alternative
+=======
+
+Let's go back to the Patriots problem.  Our test statistic is $X$, the number of successful coin flips in 25 tries.  Suppose that $p$ is the true probability that the Patriots will win the coin toss.  Considering testing the two hypotheses:  
+- $H_0: p = 1/2$.  
+- $H_A: p = 2/3$.  
+
+Suppose we decide to reject $H_0$ if $X \geq 17$.  In this case the power is easy to calculate: it's just $P(X \geq 17)$ when $X \sim \mbox{Binom}(N=25, p=2/3)$.  
+
+Let's look at `power.R.`    
+
+
+Composite alternative
+=======
+
+Compare this to the more realistic situation where our alternative hypothesis isn't so specific:  
+- $H_0: p = 1/2$.  
+- $H_A: p \neq 1/2$.
+
+This is called a "composite alternative hypothesis."  _It "hedges its bets,__ i.e. it doesn't make any specific predictions except that the null hypothesis is wrong!  
+
+Composite alternative
+=======
+
+Now the power of the test isn't just a single number.
+
+Rather, it's a function, or a __power curve__:
+
+$$
+\mbox{Power}(p) = P(X \geq 17 \mid  p)
+$$
+
+where $p$ is the assumed binomial success probability.  This is a function of $p$.
+
+Back to `power.R`.  

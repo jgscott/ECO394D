@@ -10,12 +10,22 @@ mean(creatinine$creatclear)
 
 # OK, 125.25 +/- what?
 # Bootstrap to get a standard error
-boot1 = do(1000)*{
+boot1 = do(10000)*{
   mean(resample(creatinine)$creatclear)
 }
 
-hist(boot1$result)
+# hist(boot1$result)
 sd(boot1$result)
+
+
+sd(creatinine$creatclear)
+
+
+boot2= do(1000)*{
+  sd(resample(creatinine)$creatclear)
+}
+
+hist(boot2$result)
 
 # Interpetation: our sample mean is probably off from the true population mean by about 0.95 units
 
@@ -38,7 +48,7 @@ boot1 = do(1000)*lm(creatclear~age, data=resample(creatinine))
 head(boot1)
 
 hist(boot1$Intercept)
-hist(boot1$age)
+hist(boot1$age, 30)
 
 # bootstrapped standard errors
 sd(boot1$Intercept)

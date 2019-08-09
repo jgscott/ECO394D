@@ -8,5 +8,4 @@ All exercises are due at the beginning of the TA session on Friday of the week t
 
 [Exercises 3.](exercises03.md)  Due Friday, August 9th.   
 
-Exercises 4.
-
+[Exercises 4.](./homework04_ECO394D.pdf)  Due Friday, August 16th.  

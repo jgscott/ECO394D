@@ -47,3 +47,8 @@ xtabs(~event + group, data=predimed)
 xtabs(~event + group, data=predimed) %>%
 	prop.table(margin=2)
 
+
+phat1 = 0.04750245
+phat2 = 0.03895509
+
+sqrt(phat1 * (1-phat1)/2042 + phat2*(1-phat2)/2182)

@@ -144,6 +144,7 @@ Slides: [Introduction to hypothesis testing](http://rpubs.com/jgscott/testing)
   
 R scripts and data:    
 - [patriots.R](./R/patriots.R)  
+- [power.R](./R/power.R)   
 
 
 ### Introduction to asymptotic theory 

@@ -1,4 +1,4 @@
-Asymptotic theory: a short introduction
+Introduction to asymptotic theory
 ===================
 date: James Scott (UT-Austin)
 autosize: true
@@ -30,12 +30,12 @@ Outline
 
 ***
 
-- Central limit theorem 
+- Central limit theorem and asymptotic normality  
 - Normal-theory confidence intervals  
 - Normal-theory hypothesis tests  
 
 
-Some important ineqalities
+Some important inequalities
 =====
 
 We'll study three important inequalities in probability theory:
@@ -383,7 +383,7 @@ Central limit theorem
 Suppose that $X_1, \ldots, X_n$ are IID random variables with mean $\mu$ and variance $\sigma^2$.  Let $\bar{X}_n$ be the sample mean:
 
 $$
-\bar{X}_n = \frac{1}{nN} \sum_{i=1}^n X_i
+\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i
 $$
 
 Now define the $z$-score of the sample mean as  
@@ -519,12 +519,91 @@ It turns out that the central limit theorem still holds even if we use the plug-
 That is, let
 
 $$
-Z_n = \frac{\bar{X}_n - \mu}{\hat{se}(\bar{X}_n)} = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\hat\sigma}
+T_n = \frac{\bar{X}_n - \mu}{\hat{se}(\bar{X}_n)} = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\hat\sigma}
 $$
 
-Then $Z_n \rightsquigarrow Z$, where $Z$ is a standard normal random variable.  
+Then $T_n \rightsquigarrow Z$, where $Z$ is a standard normal random variable.  (We call $T_n$ a $t$-statistic rather than a $z$-score.)  
 
-Example 2
-=====
 
-Suppose that we sample $N=49$ hospital patients and measure their systolic blood pressure. What is the probability that the sample average $\bar{X}_n$ is more than 5 units from the true population average $\mu$?  
+As aside
+=======
+
+If you've taken a statistics class before, you may remember spending a lot of time on $t$ statistics and the $t$ distribution.
+
+
+As aside
+=======
+
+Your experience might have involved a horrible, soul-crushing table that looked something like this:  
+
+```{r, out.width = "550px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/tdistribution.png") 
+```
+
+
+As aside
+=======
+
+The $Z$ statistic and $T$ statistic are really similar:  
+- $Z$ statistic: divide an estimator by its true standard error, $\mbox{se}(\hat{\theta})$.  
+- $T$ statistic: divide an estimator by __an estimate of__ its true standard error, $\hat{se}(\hat{\theta})$.  
+
+In particular, both $Z$ and $T$ are asymptotically normal!  
+- We can make approximate probability statements about either of them using the normal distribution.  
+- The difference between $\mbox{se}(\hat{\theta})$ and $\hat{se}(\hat{\theta})$ is usually much smaller than the uncertainty you have about $\theta$ in the first place.  
+
+
+So what gives?
+=======
+
+The whole point of that awful table was to correct for the small errors in the normal approximation that emerge when $n$ is modest (say, less than 30).     
+- This was common in 1908, when the $t$ distribution was invented, and when most statisticians were concerned with analyzing data from small agricultural experiments.    
+- This is pretty rare today.  Data sets are bigger than they were a century ago.  (And even for small samples, the differences are pretty small.)  
+
+
+
+So what gives?
+=======
+
+The whole point of that awful table was to correct for the small errors in the normal approximation that emerge when $n$ is modest (say, less than 30).    
+- This was common in 1908, when the $t$ distribution was invented, and when most statisticians were concerned with analyzing data from small agricultural experiments.    
+- This is pretty rare today.  Data sets are bigger than they were a century ago.  (And even for small samples, the differences are pretty small.)  
+- I have __never, in my entire career,__ encountered a real-life example where the difference between the normal and $t$ distribution made a substantive scientific difference.  (I asked three other statisticians on my hallway and they all said the same thing.)
+
+
+As aside
+=======
+
+So we'll basically ignore this table: 
+
+```{r, out.width = "550px", fig.align='center', echo=FALSE}
+knitr::include_graphics("fig/tdistribution.png") 
+```
+
+We'll proceed as if both $Z$ statistics and $T$ statistics are normally distributed (which they are for large samples).   
+
+
+But...
+=======
+
+I cannot promise that everyone you encounter will be so sensible.  
+- journal editors...  
+- peer reviewers...  
+- econometrics teachers...
+- PhD advisors...
+- etc.    
+
+Some of these people may make you do calculations with the $t$ distribution, in which case you will have to remind yourself about it.  
+
+
+But...
+=======
+
+I cannot promise that everyone you encounter will be so sensible.  
+- journal editors...  
+- peer reviewers...  
+- econometrics teachers...
+- PhD advisors...
+- etc.    
+
+Some of these people may make you do calculations with the $t$ distribution, in which case you will have to remind yourself about it.  __Sorry :-(__

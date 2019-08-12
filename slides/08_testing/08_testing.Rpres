@@ -599,9 +599,9 @@ If you choose $R$ based on the data, then the _rejection region itself is a rand
 An important caveat
 ======
 
-Be like a physicist here.
+__Don't be a cheater like Tom Brady.__ Instead, be like a physicist.  
 
-Physicists (especially particle physicists) are the most honest statisticians in the observable universe.  They __always__ specify $R$ in advance, and they never change their $\alpha$ level to make their data look maximally impressive.  
+Physicists (especially particle physicists) are the most honest statisticians in the observable universe.  They always specify $R$ in advance, and they never change their $\alpha$ level retrospectively to make their data look maximally impressive.  
 
 In my experience, people in most other fields are sloppy, dishonest, or both when it comes to setting $\alpha$ levels.  
 

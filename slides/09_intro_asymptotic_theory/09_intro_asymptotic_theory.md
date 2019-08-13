@@ -433,6 +433,12 @@ Central limit theorem: comments
 3. The bigger the sample size, the closer the approximation gets.  By $n=30$, the normal approximation is pretty good, unless the distribution of $X_i$ is super heavy tailed and/or skewed.   
 
 
+Central limit theorem: comments
+=====
+
+Let's see some examples in `CLT.R`.   
+
+
 An example
 =====
 type: prompt
@@ -444,6 +450,7 @@ FedEx logistics:
 Today's logistics problem: 1810 packages are in the system and scheduled to be shipped to Austin.  But these packages have yet to be weighed at the sorting facility.
 
 Your turn: What is the probability that FedEx will need more than one flight to Austin to get all 1810 packages there?
+
 
 An example
 =====
@@ -558,40 +565,223 @@ So what gives?
 The whole point of that awful table was to correct for the small errors in the normal approximation that emerge when $n$ is modest (say, less than 30).    
 - This was common in 1908, when the $t$ distribution was invented, and when most statisticians were concerned with analyzing data from small agricultural experiments.    
 - This is pretty rare today.  Data sets are bigger than they were a century ago.  (And even for small samples, the differences are pretty small.)  
-- I have __never, in my entire career,__ encountered a real-life example where the difference between the normal and $t$ distribution made a substantive scientific difference.  (I asked three other statisticians on my hallway and they all said the same thing.)
+- I have __never, in my entire career,__ encountered a real-life example where the difference between using the normal and $t$ distributions made a substantive scientific difference.  (I asked three other statisticians on my hallway and they all said the same thing.)
 
 
 As aside
 =======
 
-So we'll basically ignore this table: 
+So we'll basically ignore this horrible table and treat the $T$ statistic as if it were normal (which it is, asymptotically!)  
 
 <img src="fig/tdistribution.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="550px" style="display: block; margin: auto;" />
 
-We'll proceed as if both $Z$ statistics and $T$ statistics are normally distributed (which they are for large samples).   
+
+But...
+=======
+
+I cannot promise that everyone you encounter will be so gosh darn sensible.  
+- journal editors...  
+- peer reviewers...  
+- econometrics teachers...
+- PhD advisors...
+- the FDA...
+
+Some of these people may make you do calculations with the $t$ distribution, in which case you will have to learn/remind yourself about it.  
 
 
 But...
 =======
 
-I cannot promise that everyone you encounter will be so sensible.  
+I cannot promise that everyone you encounter will be so gosh darn sensible.  
 - journal editors...  
 - peer reviewers...  
 - econometrics teachers...
 - PhD advisors...
-- etc.    
+- the FDA...
 
-Some of these people may make you do calculations with the $t$ distribution, in which case you will have to remind yourself about it.  
+Some of these people may make you do calculations with the $t$ distribution, in which case you will have to learn/remind yourself about it.  __Sorry :-(__
 
 
-But...
+
+CLT: summary  
 =======
 
-I cannot promise that everyone you encounter will be so sensible.  
-- journal editors...  
-- peer reviewers...  
-- econometrics teachers...
-- PhD advisors...
-- etc.    
+Suppose we're trying to estimate $\theta$ using an estimator $\hat{\theta}_n$. Let $\hat{se}(\hat{\theta}_n)$ be the (estimated) standard error of $\hat{\theta}_n$.  Define
 
-Some of these people may make you do calculations with the $t$ distribution, in which case you will have to remind yourself about it.  __Sorry :-(__
+$$
+Z_n =  \frac{\hat{\theta}_n - \theta}{\hat{se}(\hat{\theta}_n)}
+$$
+
+If $Z_n \rightsquigarrow Z$ where $Z \sim N(0,1)$, we say that $\hat{\theta}$ is _asymptotically normal._  
+
+
+CLT: summary  
+=======
+
+The central limit theorem can be used to prove that lots of common estimators are asymptotically normal:  
+- sample means and proportions  
+- differences of sample means and proportions  
+- sample standard deviations and correlations  
+- OLS estimators of the intercept and slope   
+- basically anything that looks like an average of some sample quantity! 
+
+
+Confidence intervals
+=======
+
+One consequence of this fact is that we can use the normal distribution to produce approximate confidence intervals for lots of common statistics problems.
+
+How does that work?
+
+
+Confidence intervals
+=======
+
+Suppose that we have some $\hat{\theta}_n$ that we know to be asymptotically normal.  Then we have the following approximation:  
+
+$$
+\frac{\hat{\theta}_n - \theta}{\hat{se}(\hat{\theta}_n)} \sim N(0,1)  
+$$
+
+Therefore,  
+$$
+\hat{\theta}_n - \theta \sim N \left( 0, \hat{se}(\hat{\theta}_n) \right)
+$$
+
+That is, our estimation error is (approximately) normally distributed.  
+
+
+Confidence intervals
+=======
+
+So, for example, if we go out one standard error:
+
+$$
+P \left[ \hat{\theta}_n - \theta \in \left( -\hat{se},  \hat{se} \right) \right] \approx 0.68
+$$
+
+And if we go out two standard errors:
+
+$$
+P \left[ \hat{\theta}_n - \theta \in \left( -2 \hat{se}, 2 \hat{se} \right) \right] \approx 0.95
+$$
+
+Probalistic bounds on estimation error = confidence intervals!  
+
+
+Confidence intervals
+=======
+
+In general, if $\hat{\theta}_n$ is asymptotically normal, and if we let $z_\alpha$ denote the $(1 - \alpha/2)$ quantile of the normal distribution, then the interval estimate
+
+$$
+I_n = [\hat{L}_N, \hat{U}_N] =  \hat{\theta}_n \pm z_\alpha \cdot \hat{se}(\hat{\theta}_n)
+$$
+
+is an approximate confidence interval at level $1-\alpha$.  That is, it covers the true value $\theta$ with probability approximately equal to $1 - \alpha$.  
+
+
+Confidence intervals
+=======
+
+Remember the frequentist coverage principle?
+
+$$
+P_{\theta} \left( \theta \in [\hat{L}_N, \hat{U}_N] \right) \geq 1- \alpha \, ,
+$$
+
+Remember our three questions?  (What is fixed?  What is random?  What is the source of this randomness?)
+
+It's the same statement again.  Here, as with bootstrapped confidence intervals, the probability claim is _approximately_ true, and the approximation gets better with larger $n$.  
+
+
+Confidence intervals
+=======
+
+Let's see a couple of examples in `normalCI_examples.R`.    
+
+
+
+Testing
+=======
+
+A really similar line of thinking allows us to construct hypothesis tests.  
+Suppose we have:
+- an unknown parameter $\theta$  
+- an asymptotically normal test statistic $T_n$  
+- a null hypothesis that $\theta = \theta_0$  
+
+
+Testing
+=======
+
+Because of asymptotic normality, we know that if the null hypothesis is true (i.e. $\theta = \theta_0$), then
+
+$$
+T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n))
+$$
+
+where $\bar{T}_0 = E(T \mid \theta = \theta_0)$ and $\mbox{se}_0 (T_n)$ are the mean and standard error of $T_n$, assuming that $\theta = \theta_0$.   
+
+We can then do any kind of test we want:
+- Fisher: calculate a $p$-value$  
+- Neyman-Pearson: specify an alternative hypothesis, choose a rejection region, calculate $\alpha$ and power  
+
+
+
+Example
+=======
+
+Ikea produces 148.9 million of those tiny little Allen wrenches each year (5 wrenches per second, all day every day).  The wrenches should be 5.0 mm in diameter, on average.  If they're not, something has gone awry in the manufacturing process.  
+
+The last 50 wrenches that were sampled off the assembly line have measured 5.03 mm in average diameter, with a standard deviation of 0.07 mm.
+
+Should we stop making wrenches and figure out what's wrong?  Or is this just a chance statistical fluctuation?  
+
+
+Example
+=======
+
+Let $X_i$ be the diameter of wrench $i$, and let $\mu = E(X_i).  The null hypothesis is that $\mu = 5.0$.  Let's compute a $p$-value under this null hypothesis.
+- Our test statistic is $T = \bar{X}_n$.  This is asymptotically normal.  
+- From de Moivre's equation, our standard error is $\hat{se} (\bar{X}_N) = 0.07/\sqrt{30} = 0.0128$.  
+
+
+Example
+=======
+
+So under the null hypothesis, we can approximate the sampling distribution of $\bar{X}_n$ as
+
+$$
+\bar{X}_n \sim N(5.0, 0.0128)
+$$
+
+Under this null hypothesis, we have $P(\bar{X}_n \geq 5.03) = 0.0095$.  
+
+Example
+=======
+
+Note: in this case we might want to calculate a two-sided $p$-value as:
+
+$$
+P(\bar{X}_n \leq 4.97) + P(\bar{X}_n \geq 5.03 ) = 0.019
+$$
+
+The thinking here is that deviations up and down are both equally important, and we don't have any prior ideas about which we expect.  
+
+
+Example
+=======
+
+Note: compare this with the normal-theory confidence interval for $\mu$ in light of the data.
+
+$$
+\begin{align}
+\mu &\in \bar{X}_n \pm 2 \cdot \hat{se}(\bar{X}_m)  \\
+&=  5.03 \pm 2 \cdot 0.0128 \\
+&= (5.0044, 5.0556)  
+\end{align}
+$$
+
+Isn't that way more informative? 
+$$

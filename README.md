@@ -149,7 +149,10 @@ R scripts and data:
 
 ### Introduction to asymptotic theory 
 
+Slides: [Introduction to asymptotic theory](http://rpubs.com/jgscott/intro_asymptotic_theory)    
+  
 
 R scripts and data:    
-- [clt.R](./R/clt.R)  
+- [clt.R](./R/clt.R)   
+- [normalCI_examples.R](./R/normalCI_examples.R)  
   

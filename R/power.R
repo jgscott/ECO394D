@@ -10,7 +10,7 @@ library(mosaic)
 # Make an assumption about the true P
 
 N = 25
-assumed_P = 0.667
+assumed_P = 0.9
 out = do(10000)*{
 	x_sim = rbinom(1, N, assumed_P)
 	x_sim >= 17
@@ -38,5 +38,3 @@ for(i in seq_along(P_grid)) {
 }
 
 plot(P_grid, power_grid)
-
-

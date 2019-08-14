@@ -421,7 +421,7 @@ $$
 \bar{X}_n \approx N \left(\mu, \frac{\sigma}{\sqrt{n}} \right)
 $$
 
-Formally, this means that the CDF of $\bar{X}_n$ coverges to that of a normal distribution with mean $\mu$ and standard deviation $\sigma/\sqrt{n}$.  
+Informally, this means that the CDF of $\bar{X}_n$ is close to that of a normal distribution with mean $\mu$ and standard deviation $\sigma/\sqrt{n}$.  
 
 Central limit theorem: comments
 =====
@@ -439,20 +439,18 @@ Central limit theorem: comments
 Let's see some examples in `CLT.R`.   
 
 
-An example
+An example: FedEx logistics
 =====
 type: prompt
-
-FedEx logistics:  
+  
 - A FedEx 737 cargo plane has a max cargo capacity of 11,422 pounds.
 - From a long run of experience, FedEx knows that the average weight of a package is 6.1 pounds, with a standard deviation of 5.6 pounds (the distribution is skewed right: most packages are pretty light, a few packages are really heavy).  
-
-Today's logistics problem: 1810 packages are in the system and scheduled to be shipped to Austin.  But these packages have yet to be weighed at the sorting facility.
+- Today's logistics problem: 1810 packages are in the system and scheduled to be shipped to Austin.  But these packages have yet to be weighed at the sorting facility.
 
 Your turn: What is the probability that FedEx will need more than one flight to Austin to get all 1810 packages there?
 
 
-An example
+An example: FedEx logistics
 =====
 
 Let $X_i$ be the weight of package $i = 1, \ldots, 1810$.  FedEx will need only one flight to Austin if 
@@ -470,7 +468,7 @@ $$
 That is, average package weight $\bar{X}_n$ cannot exceed 6.31 pounds (recall $\mu = 6.1$ and $\sigma = 5.6$).  
 
 
-An example
+An example: FedEx logistics
 =====
 
 So what is $P(\bar{X}_n \leq 6.31)$?
@@ -478,7 +476,7 @@ So what is $P(\bar{X}_n \leq 6.31)$?
 The sample size is $n=1810$: pretty large!  So use the central limit theorem: __make approximate statements about $\bar{X}$ using statements about the normal distribution.__
 
 
-An example
+An example: FedEx logistics
 =====
 
 This gives us:
@@ -579,7 +577,7 @@ So we'll basically ignore this horrible table and treat the $T$ statistic as if 
 But...
 =======
 
-I cannot promise that everyone you encounter will be so gosh darn sensible.  
+I cannot promise that everyone you encounter will be so sensible.  
 - journal editors...  
 - peer reviewers...  
 - econometrics teachers...
@@ -592,7 +590,7 @@ Some of these people may make you do calculations with the $t$ distribution, in 
 But...
 =======
 
-I cannot promise that everyone you encounter will be so gosh darn sensible.  
+I cannot promise that everyone you encounter will be so sensible.  
 - journal editors...  
 - peer reviewers...  
 - econometrics teachers...
@@ -618,12 +616,12 @@ If $Z_n \rightsquigarrow Z$ where $Z \sim N(0,1)$, we say that $\hat{\theta}$ is
 CLT: summary  
 =======
 
-The central limit theorem can be used to prove that lots of common estimators are asymptotically normal:  
+There are variations on the central limit theorem showing that lots of common estimators are asymptotically normal:  
 - sample means and proportions  
 - differences of sample means and proportions  
 - sample standard deviations and correlations  
 - OLS estimators of the intercept and slope   
-- basically anything that looks like an average of some sample quantity! 
+- basically anything that looks like an average of some sample quantity! __Averages eventually look normal.__
 
 
 Confidence intervals
@@ -643,12 +641,13 @@ $$
 \frac{\hat{\theta}_n - \theta}{\hat{se}(\hat{\theta}_n)} \sim N(0,1)  
 $$
 
-Therefore,  
+That is, our estimation error is (approximately) normally distributed:
+
 $$
 \hat{\theta}_n - \theta \sim N \left( 0, \hat{se}(\hat{\theta}_n) \right)
 $$
 
-That is, our estimation error is (approximately) normally distributed.  
+
 
 
 Confidence intervals
@@ -724,7 +723,7 @@ $$
 where $\bar{T}_0 = E(T \mid \theta = \theta_0)$ and $\mbox{se}_0 (T_n)$ are the mean and standard error of $T_n$, assuming that $\theta = \theta_0$.   
 
 We can then do any kind of test we want:
-- Fisher: calculate a $p$-value$  
+- Fisher: calculate a $p$-value  
 - Neyman-Pearson: specify an alternative hypothesis, choose a rejection region, calculate $\alpha$ and power  
 
 
@@ -742,9 +741,9 @@ Should we stop making wrenches and figure out what's wrong?  Or is this just a c
 Example
 =======
 
-Let $X_i$ be the diameter of wrench $i$, and let $\mu = E(X_i).  The null hypothesis is that $\mu = 5.0$.  Let's compute a $p$-value under this null hypothesis.
-- Our test statistic is $T = \bar{X}_n$.  This is asymptotically normal.  
-- From de Moivre's equation, our standard error is $\hat{se} (\bar{X}_N) = 0.07/\sqrt{30} = 0.0128$.  
+Let $X_i$ be the diameter of wrench $i$, and let $\mu = E(X_i)$.  The null hypothesis is that $\mu = 5.0$.  Let's compute a $p$-value under this null hypothesis.
+- Our test statistic is $T = \bar{X}_n$.  From the CLT, we know this is asymptotically normal.  
+- From de Moivre's equation, our (estimated) standard error is $\hat{se} (\bar{X}_N) = 0.07/\sqrt{30} = 0.0128$.  
 
 
 Example
@@ -756,7 +755,7 @@ $$
 \bar{X}_n \sim N(5.0, 0.0128)
 $$
 
-Under this null hypothesis, we have $P(\bar{X}_n \geq 5.03) = 0.0095$.  
+Under this null hypothesis, we have $p = P(\bar{X}_n \geq 5.03) = 0.0095$.  
 
 Example
 =======
@@ -764,16 +763,48 @@ Example
 Note: in this case we might want to calculate a two-sided $p$-value as:
 
 $$
-P(\bar{X}_n \leq 4.97) + P(\bar{X}_n \geq 5.03 ) = 0.019
+p = P(\bar{X}_n \leq 4.97) + P(\bar{X}_n \geq 5.03 ) = 0.019
 $$
 
-The thinking here is that deviations up and down are both equally important, and we don't have any prior ideas about which we expect.  
+The thinking here is that deviations of $\geq 0.03$ up and down are both equally important, and they should both count as "more extreme than" a deviation of 5.03.  
+
+Remember: in general the $p$ value is $P(T \in \Gamma(t_{ob}) \mid H_0)$, where $\Gamma(t)$ is the set of test statistics that are judged "more extreme than" some specific value $t$.  
 
 
-Example
+Standardized test statistics
 =======
 
-Note: compare this with the normal-theory confidence interval for $\mu$ in light of the data.
+Any time we're doing a test under the assumption of asymptotic normality, we can always _standardize_ our test statistic to compare it to a standard $N(0,1)$ distribution.  If $T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n))$ under the null, then
+
+$$
+Z_n = \frac{(T_n - \bar{T}_0)}{\mbox{se}_0 (T_n)} \sim N(0,1)
+$$
+
+
+Standardized test statistics
+=======
+
+So the general recipe for testing under asymptotic normality is:
+  1. Calculate $\bar{T}_0$ and $\mbox{se}_0 (T_n)$, the mean and standard error of your test statistic under the null hypothesis.  
+  2. Standardize your observe test statistic as
+  $$
+  z_{ob} = \frac{(t_{ob} - \bar{T}_0)}{\mbox{se}_0 (T_n)}
+  $$
+  3. Compare $z_{ob}$ to a standard normal distribution (using either a Fisher or a Neyman-Pearson test).  
+  
+  
+A few notes
+=======
+
+- $z_{ob}$ can be interpreted as a signal-to-noise ratio: "how many standard deviations away is $z_{ob}$ from what we'd expect based on the null hypothesis?"  
+- Remember, some fastidious people will call $z_{ob}$ a "t statistic" and want you to compare it to a $t$ distribution rather than a normal distribution.  (This is called a "t test.")  But the difference between these two is usually small, and virtually always dominated by other sources of error.  
+- If you want to sound fancy, you can call the test based on asymptotic normality a __Wald test.__  
+
+
+Testing vs. confidence interval  
+=======
+
+Note: compare our test with the normal-theory confidence interval for $\mu$ in light of the data.
 
 $$
 \begin{align}
@@ -783,5 +814,16 @@ $$
 \end{align}
 $$
 
-Isn't that way more informative? 
-$$
+Isn't that way more informative than quoting $p = 0.019$?
+
+
+Some examples
+=======
+
+I'll show you a few examples of normal-based testing and confidence intervals in action:    
+- [Requests for Abortion in Latin America Related to Concern about Zika Virus Exposure](https://www.nejm.org/doi/full/10.1056/NEJMc1605389), Figure S1, S3, and Table 1.  
+- [The influence of hours worked prior to delivery on maternal and neonatal outcomes: a retrospective cohort study](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5086304/), Table 3 and Figure 1.         
+- [Beauty in the classroom: instructors' pulchritude and putative pedagogical productivity](https://www.nber.org/papers/w9853.pdf), Table 3.  
+
+In each case, the confidence interval is more scientifically meaningful and interpretable, compared to the $p$-value.  
+

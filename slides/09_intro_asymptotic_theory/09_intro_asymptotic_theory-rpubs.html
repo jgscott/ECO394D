@@ -1263,7 +1263,7 @@ Z_n = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\sigma} \approx N(0, 1)
 \bar{X}_n \approx N \left(\mu, \frac{\sigma}{\sqrt{n}} \right)
  \]</p>
 
-<p>Formally, this means that the CDF of \( \bar{X}_n \) coverges to that of a normal distribution with mean \( \mu \) and standard deviation \( \sigma/\sqrt{n} \).  </p>
+<p>Informally, this means that the CDF of \( \bar{X}_n \) is close to that of a normal distribution with mean \( \mu \) and standard deviation \( \sigma/\sqrt{n} \).  </p>
 
 </div>
 
@@ -1289,16 +1289,13 @@ Z_n = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\sigma} \approx N(0, 1)
 
 </section>
 <section data-state="prompt" data-transition="none" data-transition-speed="default">
-<h3>An example</h3>
+<h3>An example: FedEx logistics</h3>
 <div class="slideContent" >
-<p>FedEx logistics:  </p>
-
 <ul>
 <li>A FedEx 737 cargo plane has a max cargo capacity of 11,422 pounds.</li>
 <li>From a long run of experience, FedEx knows that the average weight of a package is 6.1 pounds, with a standard deviation of 5.6 pounds (the distribution is skewed right: most packages are pretty light, a few packages are really heavy).<br/></li>
+<li>Today&#39;s logistics problem: 1810 packages are in the system and scheduled to be shipped to Austin.  But these packages have yet to be weighed at the sorting facility.</li>
 </ul>
-
-<p>Today&#39;s logistics problem: 1810 packages are in the system and scheduled to be shipped to Austin.  But these packages have yet to be weighed at the sorting facility.</p>
 
 <p>Your turn: What is the probability that FedEx will need more than one flight to Austin to get all 1810 packages there?</p>
 
@@ -1306,7 +1303,7 @@ Z_n = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\sigma} \approx N(0, 1)
 
 </section>
 <section data-transition="none" data-transition-speed="default">
-<h3>An example</h3>
+<h3>An example: FedEx logistics</h3>
 <div class="slideContent" >
 <p>Let \( X_i \) be the weight of package \( i = 1, \ldots, 1810 \).  FedEx will need only one flight to Austin if </p>
 
@@ -1326,7 +1323,7 @@ Z_n = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\sigma} \approx N(0, 1)
 
 </section>
 <section data-transition="none" data-transition-speed="default">
-<h3>An example</h3>
+<h3>An example: FedEx logistics</h3>
 <div class="slideContent" >
 <p>So what is \( P(\bar{X}_n \leq 6.31) \)?</p>
 
@@ -1336,7 +1333,7 @@ Z_n = \frac{\sqrt{n} (\bar{X}_n - \mu)}{\sigma} \approx N(0, 1)
 
 </section>
 <section data-transition="none" data-transition-speed="default">
-<h3>An example</h3>
+<h3>An example: FedEx logistics</h3>
 <div class="slideContent" >
 <p>This gives us:</p>
 
@@ -1464,7 +1461,7 @@ T_n = \frac{\bar{X}_n - \mu}{\hat{se}(\bar{X}_n)} = \frac{\sqrt{n} (\bar{X}_n - 
 <section data-transition="none" data-transition-speed="default">
 <h3>But...</h3>
 <div class="slideContent" >
-<p>I cannot promise that everyone you encounter will be so gosh darn sensible.  </p>
+<p>I cannot promise that everyone you encounter will be so sensible.  </p>
 
 <ul>
 <li>journal editors&hellip;<br/></li>
@@ -1482,7 +1479,7 @@ T_n = \frac{\bar{X}_n - \mu}{\hat{se}(\bar{X}_n)} = \frac{\sqrt{n} (\bar{X}_n - 
 <section data-transition="none" data-transition-speed="default">
 <h3>But...</h3>
 <div class="slideContent" >
-<p>I cannot promise that everyone you encounter will be so gosh darn sensible.  </p>
+<p>I cannot promise that everyone you encounter will be so sensible.  </p>
 
 <ul>
 <li>journal editors&hellip;<br/></li>
@@ -1514,14 +1511,14 @@ Z_n =  \frac{\hat{\theta}_n - \theta}{\hat{se}(\hat{\theta}_n)}
 <section data-transition="none" data-transition-speed="default">
 <h3>CLT: summary  </h3>
 <div class="slideContent" >
-<p>The central limit theorem can be used to prove that lots of common estimators are asymptotically normal:  </p>
+<p>There are variations on the central limit theorem showing that lots of common estimators are asymptotically normal:  </p>
 
 <ul>
 <li>sample means and proportions<br/></li>
 <li>differences of sample means and proportions<br/></li>
 <li>sample standard deviations and correlations<br/></li>
 <li>OLS estimators of the intercept and slope<br/></li>
-<li>basically anything that looks like an average of some sample quantity! </li>
+<li>basically anything that looks like an average of some sample quantity! <strong>Averages eventually look normal.</strong></li>
 </ul>
 
 </div>
@@ -1546,12 +1543,11 @@ Z_n =  \frac{\hat{\theta}_n - \theta}{\hat{se}(\hat{\theta}_n)}
 \frac{\hat{\theta}_n - \theta}{\hat{se}(\hat{\theta}_n)} \sim N(0,1)  
  \]</p>
 
-<p>Therefore,<br/>
-\[ 
+<p>That is, our estimation error is (approximately) normally distributed:</p>
+
+<p>\[ 
 \hat{\theta}_n - \theta \sim N \left( 0, \hat{se}(\hat{\theta}_n) \right)
  \]</p>
-
-<p>That is, our estimation error is (approximately) normally distributed.  </p>
 
 </div>
 
@@ -1643,7 +1639,7 @@ T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n))
 <p>We can then do any kind of test we want:</p>
 
 <ul>
-<li>Fisher: calculate a \( p \)-value$<br/></li>
+<li>Fisher: calculate a \( p \)-value<br/></li>
 <li>Neyman-Pearson: specify an alternative hypothesis, choose a rejection region, calculate \( \alpha \) and power<br/></li>
 </ul>
 
@@ -1665,11 +1661,11 @@ T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n))
 <section data-transition="none" data-transition-speed="default">
 <h3>Example</h3>
 <div class="slideContent" >
-<p>Let \( X_i \) be the diameter of wrench \( i \), and let $\mu = E(X_i).  The null hypothesis is that \( \mu = 5.0 \).  Let&#39;s compute a \( p \)-value under this null hypothesis.</p>
+<p>Let \( X_i \) be the diameter of wrench \( i \), and let \( \mu = E(X_i) \).  The null hypothesis is that \( \mu = 5.0 \).  Let&#39;s compute a \( p \)-value under this null hypothesis.</p>
 
 <ul>
-<li>Our test statistic is \( T = \bar{X}_n \).  This is asymptotically normal.<br/></li>
-<li>From de Moivre&#39;s equation, our standard error is \( \hat{se} (\bar{X}_N) = 0.07/\sqrt{30} = 0.0128 \).<br/></li>
+<li>Our test statistic is \( T = \bar{X}_n \).  From the CLT, we know this is asymptotically normal.<br/></li>
+<li>From de Moivre&#39;s equation, our (estimated) standard error is \( \hat{se} (\bar{X}_N) = 0.07/\sqrt{30} = 0.0128 \).<br/></li>
 </ul>
 
 </div>
@@ -1684,7 +1680,7 @@ T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n))
 \bar{X}_n \sim N(5.0, 0.0128)
  \]</p>
 
-<p>Under this null hypothesis, we have \( P(\bar{X}_n \geq 5.03) = 0.0095 \).  </p>
+<p>Under this null hypothesis, we have \( p = P(\bar{X}_n \geq 5.03) = 0.0095 \).  </p>
 
 </div>
 
@@ -1695,18 +1691,61 @@ T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n))
 <p>Note: in this case we might want to calculate a two-sided \( p \)-value as:</p>
 
 <p>\[ 
-P(\bar{X}_n \leq 4.97) + P(\bar{X}_n \geq 5.03 ) = 0.019
+p = P(\bar{X}_n \leq 4.97) + P(\bar{X}_n \geq 5.03 ) = 0.019
  \]</p>
 
-<p>The thinking here is that deviations up and down are both equally important, and we don&#39;t have any prior ideas about which we expect.  </p>
+<p>The thinking here is that deviations of \( \geq 0.03 \) up and down are both equally important, and they should both count as &ldquo;more extreme than&rdquo; a deviation of 5.03.  </p>
+
+<p>Remember: in general the \( p \) value is \( P(T \in \Gamma(t_{ob}) \mid H_0) \), where \( \Gamma(t) \) is the set of test statistics that are judged &ldquo;more extreme than&rdquo; some specific value \( t \).  </p>
 
 </div>
 
 </section>
 <section data-transition="none" data-transition-speed="default">
-<h3>Example</h3>
+<h3>Standardized test statistics</h3>
 <div class="slideContent" >
-<p>Note: compare this with the normal-theory confidence interval for \( \mu \) in light of the data.</p>
+<p>Any time we&#39;re doing a test under the assumption of asymptotic normality, we can always <em>standardize</em> our test statistic to compare it to a standard \( N(0,1) \) distribution.  If \( T_n \sim N(\bar{T}_0, \mbox{se}_0 (T_n)) \) under the null, then</p>
+
+<p>\[ 
+Z_n = \frac{(T_n - \bar{T}_0)}{\mbox{se}_0 (T_n)} \sim N(0,1)
+ \]</p>
+
+</div>
+
+</section>
+<section data-transition="none" data-transition-speed="default">
+<h3>Standardized test statistics</h3>
+<div class="slideContent" >
+<p>So the general recipe for testing under asymptotic normality is:</p>
+
+<ol>
+<li>Calculate \( \bar{T}_0 \) and \( \mbox{se}_0 (T_n) \), the mean and standard error of your test statistic under the null hypothesis.<br/></li>
+<li>Standardize your observe test statistic as
+\[ 
+  z_{ob} = \frac{(t_{ob} - \bar{T}_0)}{\mbox{se}_0 (T_n)}
+   \]</li>
+<li>Compare \( z_{ob} \) to a standard normal distribution (using either a Fisher or a Neyman-Pearson test).<br/></li>
+</ol>
+
+</div>
+
+</section>
+<section data-transition="none" data-transition-speed="default">
+<h3>A few notes</h3>
+<div class="slideContent" >
+<ul>
+<li>\( z_{ob} \) can be interpreted as a signal-to-noise ratio: &ldquo;how many standard deviations away is \( z_{ob} \) from what we&#39;d expect based on the null hypothesis?&rdquo;<br/></li>
+<li>Remember, some fastidious people will call \( z_{ob} \) a &ldquo;t statistic&rdquo; and want you to compare it to a \( t \) distribution rather than a normal distribution.  (This is called a &ldquo;t test.&rdquo;)  But the difference between these two is usually small, and virtually always dominated by other sources of error.<br/></li>
+<li>If you want to sound fancy, you can call the test based on asymptotic normality a <strong>Wald test.</strong><br/></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="none" data-transition-speed="default">
+<h3>Testing vs. confidence interval  </h3>
+<div class="slideContent" >
+<p>Note: compare our test with the normal-theory confidence interval for \( \mu \) in light of the data.</p>
 
 <p>\[ 
 \begin{align}
@@ -1716,8 +1755,23 @@ P(\bar{X}_n \leq 4.97) + P(\bar{X}_n \geq 5.03 ) = 0.019
 \end{align}
  \]</p>
 
-<p>Isn&#39;t that way more informative? 
-$$</p>
+<p>Isn&#39;t that way more informative than quoting \( p = 0.019 \)?</p>
+
+</div>
+
+</section>
+<section data-transition="none" data-transition-speed="default">
+<h3>Some examples</h3>
+<div class="slideContent" >
+<p>I&#39;ll show you a few examples of normal-based testing and confidence intervals in action:    </p>
+
+<ul>
+<li><a href="https://www.nejm.org/doi/full/10.1056/NEJMc1605389">Requests for Abortion in Latin America Related to Concern about Zika Virus Exposure</a>, Figure S1, S3, and Table 1.<br/></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5086304/">The influence of hours worked prior to delivery on maternal and neonatal outcomes: a retrospective cohort study</a>, Table 3 and Figure 1.<br/></li>
+<li><a href="https://www.nber.org/papers/w9853.pdf">Beauty in the classroom: instructors&#39; pulchritude and putative pedagogical productivity</a>, Table 3.<br/></li>
+</ul>
+
+<p>In each case, the confidence interval is more scientifically meaningful and interpretable, compared to the \( p \)-value.  </p>
 
 </div>
 

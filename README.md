@@ -156,3 +156,8 @@ R scripts and data:
 - [clt.R](./R/clt.R)   
 - [normalCI_examples.R](./R/normalCI_examples.R)  
   
+### Constructing estimators  
+
+Slides: [Constructing estimators](http://rpubs.com/jgscott/constructing_estimators)    
+  
+ 

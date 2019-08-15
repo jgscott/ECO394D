@@ -1,6 +1,6 @@
 library(mosaic)
 
-sample_size = 10
+sample_size = 50000
 NMC = 10000
 
 ## A binomial distribution
@@ -40,7 +40,7 @@ mu = 2/0.1
 mean(x)
 
 
-sample_size = 500
+sample_size = 150
 NMC = 10000
 
 out = do(NMC)*{
@@ -56,9 +56,9 @@ out = do(NMC)*{
 	z
 }
 
-# Look at the sampling distribution
-hist(out$result, 100, prob=TRUE)
-curve(dnorm(x), add=TRUE, col='blue', lwd=2)
+  # Look at the sampling distribution
+  hist(out$result, 100, prob=TRUE)
+  curve(dnorm(x), add=TRUE, col='blue', lwd=2)
 
 # compare the CDFs
 plot(ecdf(out$result))
